@@ -8,7 +8,7 @@ class Book(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     author = models.ForeignKey('Author', on_delete=models.CASCADE)
     published_date = models.DateField()
-    stock = models.ForeignKey('Stock', on_delete=models.CASCADE)
+    quantity = models.IntegerField()
 
     def __str__(self):
         return self.title
@@ -44,10 +44,7 @@ class Order(models.Model):
     def __str__(self):
         return self.book.title
     
-class Stock(models.Model):
-    book = models.ForeignKey('Book', on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.book.title
