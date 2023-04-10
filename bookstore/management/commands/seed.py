@@ -56,16 +56,19 @@ def create_book():
     """Creates an address object combining different elements from the list"""
     book_names = ["The Shining", "Harry Potter", "The Hobbit", "Charlie and the Chocolate Factory", "The Little Mermaid", "A Game of Thrones", "Foundation", "Cosmos", "Astrophysics for People in a Hurry", "Bill Nye's Big Ideas",
                   "A Brief History of Time", "The God Delusion", "Doraemon", "Shin cau be but chi", "Chu be nhut nhat", "The Little Prince", "A pewpew","Aloha"]
+    prices = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
     for i in book_names:
         book = Book(
             title=i,
-            price = random.randint(1, 100),
             author = random.choice(Author.objects.all()),
             category = random.choice(Category.objects.all()),
             quantity = random.randint(1, 100),
+            description = "this is the description",
+            price = random.choice(prices),
             #publish date date time
             published_date = date.today(),
+            book_available = True,
         )
         book.save()
 
