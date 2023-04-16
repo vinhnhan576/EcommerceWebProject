@@ -1,13 +1,13 @@
-from django.shortcuts import render 
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin 
-from .models import Book, Order
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Book, Order,OrderDetail
 from django.urls import reverse_lazy
-from django.db.models import Q # for search method
+from django.db.models import Q  # for search method
 from django.http import JsonResponse
 import json
-
 
 
 class BooksListView(ListView):
@@ -21,27 +21,111 @@ class BooksDetailView(DetailView):
 
 
 class SearchResultsListView(ListView):
-	model = Book
-	template_name = 'search_results.html'
+    model = Book
+    template_name = 'search_results.html'
 
-	def get_queryset(self): # new
-		query = self.request.GET.get('q')
-		return Book.objects.filter(
-		Q(title__icontains=query) | Q(author__icontains=query)
-		)
+    def get_queryset(self):  # new
+        query = self.request.GET.get('q')
+        return Book.objects.filter(
+            Q(title__icontains=query) | Q(author__icontains=query)
+        )
+
 
 class BookCheckoutView(LoginRequiredMixin, DetailView):
     model = Book
     template_name = 'checkout.html'
-    login_url     = 'login'
+    # login_url = 'login'
+
+    # def checkout(request):
+    #     if request.method == 'POST':
+    #         body = json.loads(request.body)
+    #         product_id = body.get('productId')
+    #         if not product_id:
+    #             return JsonResponse({'error': 'productId is required'}, status=400)
+    #         try:
+    #             product = Book.objects.get(id=product_id)
+    #         except Book.DoesNotExist:
+    #             return JsonResponse({'error': 'Invalid productId'}, status=400)
+    #         order = Order.objects.create(
+    #             user=request.user,
+    #             product=product
+    #         )
+    #         return JsonResponse({'orderId': order.id})
+    #     else:
+    #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 def paymentComplete(request):
-	body = json.loads(request.body)
-	print('BODY:', body)
-	product = Book.objects.get(id=body['productId'])
-	Order.objects.create(
-		product=product
-	)
-	return JsonResponse('Payment completed!', safe=False)
+    body = json.loads(request.body)
+    print('BODY:', body)
+    product = Book.objects.get(id=body['productId'])
+    Order.objects.create(
+        product=product
+    )
+    return JsonResponse('Payment completed!', safe=False)
 
+
+
+@csrf_exempt
+def AddToCar(request):
+    if 'cart' not in request.session:
+        request.session['cart'] = {}
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        bookId = body['id']
+        quantity = int(body['quantity'])
+        book = Book.objects.get(id=bookId)
+        if bookId in request.session['cart']:
+            request.session['cart'][bookId]['quantity'] += quantity
+            request.session['cart'][bookId]['subtotal'] += request.session['cart'][bookId]['quantity']*book.price
+        else:
+            request.session['cart'][bookId] = {
+                'name': book.title,
+                'price': book.price,
+                'quantity': quantity,
+                'subtotal':quantity*book.price
+            }
+    request.session.modified = True
+    return JsonResponse('Add completed!', safe=False)
+
+
+def ViewCart(request):
+    cart = request.session.get('cart', {})
+    return render(request, 'cart.html', {'cart': cart})
+    
+
+def RemoveItem(request, item_id):
+    cart = request.session.get('cart', {})
+    if item_id in cart:
+        del cart[item_id]
+    request.session['cart'] = cart
+    return JsonResponse('Remove completed!', safe=False)
+def RemoveAll(request):
+    cart = request.session.get('cart', {})
+    cart.clear()
+    request.session['cart'] = cart
+    return JsonResponse('Remove completed!', safe=False)
+
+@csrf_exempt
+def CheckOut(request):
+    if request.method == 'POST':
+        cart = request.session.get('cart', {})
+        body = json.loads(request.body)
+        email = body.get('email')
+        total = 0
+        for productID, product in cart.items():
+            total += int(product['subtotal'])
+        order = Order.objects.create(email=email, total_price=total)
+        for productID, product in cart.items():
+            product1 = Book.objects.get(pk=productID)
+            print("before", product1.quantity)
+            order_detail = order.detail.through.objects.create(
+                order=order, book=product1, quantity=int(product.get('quantity')), total_price=product['subtotal'])
+            order_detail.save()
+            product2 = Book.objects.get(pk=productID)
+            product2.quantity -= int(product.get('quantity'))
+            product2.save()
+            print("after", product2.quantity)
+        RemoveAll(request)
+        print('success')
+    return JsonResponse('Checkout completed!', safe=False)

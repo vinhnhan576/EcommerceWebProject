@@ -1,0 +1,38 @@
+<table border="1">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product_id, product in cart.items %}
+        <tr>
+            <td id="title">{{ product.name }}</td>
+            <td id="price">{{ product.price }}</td>
+            <td id="quantity">{{ product.quantity }}</td>
+            <td id="subtotal">{{ product.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<input type="text" id="email">
+<a href="{% url 'remove_all' %}"> Detele</a>
+<input type="button" value="Checkout" onclick="Checkout()" />
+<script lang="JavaScript">
+  function Checkout() {
+    console.log("about")
+  	var url = "{% url 'check_out' %}"
+  	email = document.getElementById("email").value,
+  			fetch(url, {
+  				method: 'POST',
+  				headers: {
+  					'content-type': 'application/json',
+  					// 'X-CSRFToken': csrftoken,
+  				},
+  				body: JSON.stringify({"email":email})
+  			})
+  		}
+</script>
