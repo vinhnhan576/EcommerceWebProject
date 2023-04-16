@@ -71,6 +71,8 @@ def paymentComplete(request):
 def AddToCar(request):
     if 'cart' not in request.session:
         request.session['cart'] = {}
+    if 'cart_subtotal' not in request.session:
+        request.session['cart_subtotal'] = 0
     if request.method == 'POST':
         body = json.loads(request.body)
         bookId = body['id']
@@ -82,17 +84,21 @@ def AddToCar(request):
         else:
             request.session['cart'][bookId] = {
                 'name': book.title,
+                'author': book.author.name,
+                'cover': book.cover,
                 'price': book.price,
                 'quantity': quantity,
                 'subtotal':quantity*book.price
             }
+        request.session['cart_subtotal'] += quantity*book.price
     request.session.modified = True
     return JsonResponse('Add completed!', safe=False)
 
 
 def ViewCart(request):
     cart = request.session.get('cart', {})
-    return render(request, 'cart.html', {'cart': cart})
+    subtotal = request.session.get('cart_subtotal')
+    return render(request, 'cart.html', {'cart': cart, 'cart_subtotal': subtotal})
     
 
 def RemoveItem(request, item_id):
