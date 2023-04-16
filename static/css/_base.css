@@ -16,3 +16,11 @@ body {
 .web.container{
     max-width: 1360px;
 }
+
+.col-7-5{
+    max-width: 62.5% !important;
+}
+
+.col-4-5{
+max-width: 37.5% !important;
+}

@@ -10,10 +10,16 @@
 
 .checkout .card {
     border-radius: 10px;
+    margin-bottom: 1.5rem;
 }
 
 .checkout .card-body {
     padding: 24px;
+}
+
+.checkout-title{
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .card-row{
@@ -26,8 +32,8 @@
 }
 
 .card-row-img{
-    height: 80px;
-    width: 70px;
+    height: 85px;
+    width: 65px;
     object-fit: cover;
     border-radius: 6px;
 }
