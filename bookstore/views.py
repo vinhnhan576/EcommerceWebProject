@@ -31,9 +31,10 @@ class SearchResultsListView(ListView):
         )
 
 
-class BookCheckoutView(LoginRequiredMixin, DetailView):
+class BookCheckoutView(ListView):
     model = Book
     template_name = 'checkout.html'
+    # login_url     = 'login'
     # login_url = 'login'
 
     # def checkout(request):
