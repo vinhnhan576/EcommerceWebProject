@@ -100,22 +100,13 @@ def book_detail(request, pk):
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
     rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
-    num_of_reviews = Review.objects.filter(book=book).count()    
-    # form = CommentForm()
-    # if request.method == 'POST':
-    #     form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         comment = Comment(
-    #             author=form.cleaned_data["author"],
-    #             body=form.cleaned_data["body"],
-    #             post=post
-    #         )
-    #         comment.save()
-    # comments = Comment.objects.filter(post=post)
+    num_of_reviews = Review.objects.filter(book=book).count()  
+    reviews = Review.objects.filter(book=book)
     context = {
         "book": book,
         "rating_value": rating_value,
-        "num_of_reviews": num_of_reviews
+        "num_of_reviews": num_of_reviews,
+        "reviews": reviews
     }   
 
     return render(request, "detail.html", context)

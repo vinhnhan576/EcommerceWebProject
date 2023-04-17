@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib import admin
 from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, RemoveAll
 
 urlpatterns = [
@@ -13,4 +14,6 @@ urlpatterns = [
     path('remove_item_from_cart/', RemoveItem, name='remove_item_from_cart'),
     path('remove_all/', RemoveAll,name='remove_all'),
     path('check_out/', CheckOut, name='check_out'),
+
+    path('admin', admin.site.urls)
 ]
