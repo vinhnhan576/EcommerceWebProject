@@ -60,6 +60,8 @@ class BookCheckoutView(ListView):
     #     else:
     #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+def checkoutResult(request, email):
+    return render(request, 'checkout_result.html', {'email' : email})
 
 def paymentComplete(request):
     body = json.loads(request.body)
@@ -162,10 +164,12 @@ def RemoveItem(request, item_id):
         del cart[item_id]
     request.session['cart'] = cart
     return JsonResponse('Remove completed!', safe=False)
+
 def RemoveAll(request):
     cart = request.session.get('cart', {})
     cart.clear()
     request.session['cart'] = cart
+    request.session['cart_subtotal'] = 0
     return JsonResponse('Remove completed!', safe=False)
 
 @csrf_exempt
@@ -191,3 +195,6 @@ def CheckOut(request):
         RemoveAll(request)
         print('success')
     return JsonResponse('Checkout completed!', safe=False)
+
+def error404View(request, exception):
+    return render(request, '404.html')
