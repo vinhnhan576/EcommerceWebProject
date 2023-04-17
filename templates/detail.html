@@ -13,7 +13,7 @@
              <img src="https://dkemhji6i1k0x.cloudfront.net/000_clients/489816/page/489816HeD639gY.png" class="card-img" />
         </div>
         <div class="col-md-7 grid-margin book-detail-upper-right ">
-            <div class="card-body">
+            <div class="card-body" style="font-weight: 400;line-height: 30px;">
                 <h4 class="card-title">{{book.title}}</h4>
                 <div class="rating-feedback container">
                     <div class="rating-container">
@@ -31,8 +31,8 @@
                             <span class="feedback-text">{{num_of_reviews}} reviews</span>
                         </div>
                 </div>
-                <div class="quotes-from-books">
-                    <p class="card-text-quotes">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, minima ab nam deleniti asperiores accusamus accusantium officia, libero pariatur nobis eius eaque neque explicabo, quod sint. Similique quo ipsum facere!</p>
+                <div class="quotes-from-books" style="padding: 25px 0">
+                    <p class="card-text-quotes" style="line-height: 25px; padding-top:0;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, minima ab nam deleniti asperiores a</p>
                     <p class="quotes-author">-{{book.author.name}}</p>
                 </div>
                 <div class="category-books">
@@ -91,10 +91,6 @@
 	 </div>
 </div>
 
-<!-- <p>Follow Author: </p> -->
-<p><a href="">Follow Author</a></p>
-<p>Price: $ {{ object.price|floatformat:2 }}</p>
-
 {% if object.book_available is True %}
 
 <input type="hidden" value="{{ object.pk }}" name="id" id="id" />
@@ -105,6 +101,7 @@
   type="number"
   value="1"
 />
+
 <input type="button" class="btn btn-outline-success" value="Buy" onclick="addItem()" />
 <a href="{% url 'cart' %}"> Cart</a>
 <a href="{% url 'remove_all' %}"> Detele</a>
