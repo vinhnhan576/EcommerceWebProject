@@ -1,0 +1,62 @@
+.sidebar {
+    width: 80px;
+    border-right: 2px solid #dcd9ce;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+a>i {
+    color: #000;
+    font-size: 20px;
+}
+
+.sidebar #logo {
+    font-size: 36px;
+}
+
+.main-content {
+    
+}
+
+.navbar {
+    height: 40px;
+}
+
+.search-box {
+    width: 656px;
+}
+
+.search-box .search {
+    appearance: none;
+    border: none;
+    background: none;
+    font-size: 16px;
+    color: #777;
+}
+
+.search-box .search:hover i {
+    color: #000;
+    cursor: pointer;
+}
+
+.search-box > input {
+    font-family: 'Cabin', cursive;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-left: 4px;
+    width: 400px;
+    background-color: #f1efe3;
+}
+
+.profile-pic {
+    margin-left: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
