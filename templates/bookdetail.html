@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<br />
+<div class="book-detail-container">
+    <div class="row">
+        <div class="col-md-5 grid-margin">
+            <img src="{{ object.cover }}" class="card-img" />
+        </div>
+        <div class="col-md-7 grid-margin">
+            <div class="card-body">
+                <h4 class="card-title">{{ object.title }}</h4>
+                <div class="rating-feedback container">
+                    <div class="rating-container">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="rating-number">4.5</span>
+                        <div class="feedback-container">
+                            <i class="fa-regular fa-message-lines"></i>
+                            <span class="feedback-text">120 Feedbacks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="quotes-from-books">
+                    <p class="card-text-quotes">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, minima ab nam deleniti asperiores accusamus accusantium officia, libero pariatur nobis eius eaque neque explicabo, quod sint. Similique quo ipsum facere!</p>
+                    <p class="quotes-author">-JK Rowlings</p>
+                </div>
+                <div class="category-books">
+                    <span>Adventure</span>
+                    <span>Fantasy</span>
+                </div>
+                <div class="price-books-containers">
+                    <div class="price-books">
+                        <p class="price-books-text-before">189.000 vnd</p>
+                        <p class="price-books-text-after">159.000 vnd</p>
+                    </div>
+                    <div class="add-to-cart">
+                         <div class="quantity">
+                            <a href="#" class="quantity__minus"><span>-</span></a>
+                            <input name="quantity" type="text" class="quantity__input" value="1">
+                            <a href="#" class="quantity__plus"><span>+</span></a>
+                        </div>
+                        <button class="btn btn-primary">Buy now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7 grid-margin">
+            <div class="description-container">
+                <h4 class="description-title">Description</h4>
+                <p class="description-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, minima ab nam deleniti asperiores accusamus accusantium officia, libero pariatur nobis eius eaque neque explicabo, quod sint. Similique quo ipsum facere!</p>
+            </div>
+        </div>
+        <div class="col-md-5 grid-margin">
+            <div class="author-container">
+                <h4 class="author-title">Author</h4>
+                <p class="author-text">J.K. Rowling (author), Christopher Reath, Alena Gestabon, Steve Korg</p>
+            </div>
+            <div class="language-container">
+                <h4 class="language-title">Language</h4>
+                <p class="language-text">Standard English</p>
+            </div>
+             <div class="publish-date-container">
+                <h4 class="publish-date-title">Publish date</h4>
+                <p class="language-text">2018</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %} {% endblock content %}

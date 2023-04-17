@@ -1,0 +1,92 @@
+
+
+{% extends 'base.html' %} {% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bookdetail.css' %}"/>
+
+<br />
+<div class="book-detail container">
+    <div class="row book-detail-upper">
+        <div class="col-md-5 book-cover">
+             <img src="https://dkemhji6i1k0x.cloudfront.net/000_clients/489816/page/489816HeD639gY.png" class="card-img" />
+        </div>
+        <div class="col-md-7 grid-margin book-detail-upper-right ">
+            <div class="card-body">
+                <h4 class="card-title">{{book.title}}</h4>
+                <div class="rating-feedback container">
+                    <div class="rating-container">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="rating-number">{{rating_value}}</span>
+					</div>
+                        <div class="feedback-container">
+                            <i class="fa-regular fa-comment-dots"></i>
+                            <span class="feedback-text">{{num_of_reviews}} reviews</span>
+                        </div>
+                </div>
+                <div class="quotes-from-books">
+                    <p class="card-text-quotes">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, minima ab nam deleniti asperiores accusamus accusantium officia, libero pariatur nobis eius eaque neque explicabo, quod sint. Similique quo ipsum facere!</p>
+                    <p class="quotes-author">-{{book.author.name}}</p>
+                </div>
+                <div class="category-books">
+                        <span>{{book.category.name}}</span>
+                </div>
+            </div>
+    	</div>
+	</div>
+
+	 <div class="row book-detail-lower">
+		<div class="row" style="width:100%">
+			<div class="col-md-5"></div>
+			<div class="col-md-7">
+				 <div class="price-books-containers">
+                    <div class="price-books">
+                        <div class="price-books-text-before">$50</div>
+                        <div class="price-books-text-after">${{book.price}}</div>
+                    </div>
+                    <div class="add-to-cart">
+                         <div class="quantity">
+                            <span class="quantity__minus">-</span>
+                            <span class="quantity__input">1</span>
+                            <span class="quantity__plus">+</span>
+                        </div>
+                        <button class="btn btn-primary">Buy now</button>
+                    </div>
+                </div>
+				</div>
+		</div>
+		<div class="row" style="padding-top: 39px; width: 100%;">
+        <div class="col-md-6 grid-margin">
+            <div class="description-container">
+                <h4 class="description-title">Description</h4>
+                <p class="description-text">{{book.description}}
+				</p>
+            </div>
+        </div>
+		 <div class="col-md-1 grid-margin">
+        </div>
+        <div class="col-md-4 grid-margin">
+            <div class="author-container">
+                <h4 class="author-title">Author</h4>
+                <p class="author-text">{{book.author.name}}</p>
+            </div>
+
+            <div class="language-container">
+                <h4 class="language-title">Language</h4>
+                <p class="language-text">Standard English</p>
+            </div>
+             <div class="publish-date-container">
+                <h4 class="publish-date-title">Publish date</h4>
+                <p class="language-text">{{book.published_date}}</p>
+            </div>
+        </div>
+		</div>
+	 </div>
+</div>
+{% endblock content %}
