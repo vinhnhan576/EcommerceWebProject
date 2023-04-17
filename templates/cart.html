@@ -16,11 +16,6 @@
 			crossorigin="anonymous" />
 		<link rel="stylesheet" type="text/css" href="{% static 'css/floating-labels.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}" />
-		<style type="text/css">
-			body {
-				background-color: #f0f0f0;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -178,7 +173,7 @@
 							<div class="dashed-line o-80"></div>
 							<div class="card-row d-flex justify-content-between mb-5 mt-3">
 								<p class="card-row-fee" style="font-size: 18px; font-weight: 600; opacity: 0.8">Grand total</p>
-								<p class="card-row-cost" style="font-size: 20px; opacity: 0.8">{{cart_subtotal}}</p>
+								<p class="card-row-cost" style="font-size: 20px; opacity: 0.8">{{cart_subtotal}} vnd</p>
 							</div>
 							<input class="btn btn-lg btn-primary w-100" type="submit" value="Order now" />
 						</div>
@@ -195,18 +190,10 @@
 	const form = document.getElementById("form");
 	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		var url = "{% url 'check_out' %}";
 		email = document.getElementById("email").value;
-		await fetch(url, {
-			method: "POST",
-			headers: {
-				"content-type": "application/json",
-				// 'X-CSRFToken': csrftoken,
-			},
-			body: JSON.stringify({ email: email }),
-		});
+		
 
-		window.location = "http://127.0.0.1:8000/";
+		window.location = "../checkout_result/" + email;
 	});
 </script>
 
