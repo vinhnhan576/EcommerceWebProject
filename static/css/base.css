@@ -1,6 +1,9 @@
 .sidebar {
+    padding: 16px 0;
+    height: 100%;
     width: 80px;
     border-right: 2px solid #dcd9ce;
+    position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
@@ -16,11 +19,17 @@ a>i {
 }
 
 .main-content {
-    
+    margin-left: 100px;
 }
 
 .navbar {
-    height: 40px;
+    width: calc(100% - 100px);
+    height: 60px;
+    margin: 0 0 16px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: #f1efe3;
 }
 
 .search-box {
@@ -33,6 +42,7 @@ a>i {
     background: none;
     font-size: 16px;
     color: #777;
+    margin-left: -8px;
 }
 
 .search-box .search:hover i {
@@ -40,7 +50,7 @@ a>i {
     cursor: pointer;
 }
 
-.search-box > input {
+.search-box>input {
     font-family: 'Cabin', cursive;
     flex: 1;
     border: none;
@@ -59,4 +69,9 @@ a>i {
     height: 36px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.web.container {
+    margin-top: 32px;
+    margin-bottom: 16px;
 }
