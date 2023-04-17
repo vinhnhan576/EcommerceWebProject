@@ -1,13 +1,18 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
+from audioop import avg, avgpp
+from django.shortcuts import render 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book, Order,OrderDetail
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from .models import Book, Order, Review
 from django.urls import reverse_lazy
 from django.db.models import Q  # for search method
 from django.http import JsonResponse
 import json
+from django.db.models import Avg
 
 
 class BooksListView(ListView):
@@ -64,6 +69,56 @@ def paymentComplete(request):
         product=product
     )
     return JsonResponse('Payment completed!', safe=False)
+
+
+
+def book_detail(request, pk):
+    book = Book.objects.get(pk=pk)
+    rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
+    num_of_reviews = Review.objects.filter(book=book).count()    
+    # form = CommentForm()
+    # if request.method == 'POST':
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         comment = Comment(
+    #             author=form.cleaned_data["author"],
+    #             body=form.cleaned_data["body"],
+    #             post=post
+    #         )
+    #         comment.save()
+    # comments = Comment.objects.filter(post=post)
+    context = {
+        "book": book,
+        "rating_value": rating_value,
+        "num_of_reviews": num_of_reviews
+    }   
+
+    return render(request, "detail.html", context)
+
+
+
+def book_detail(request, pk):
+    book = Book.objects.get(pk=pk)
+    rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
+    num_of_reviews = Review.objects.filter(book=book).count()    
+    # form = CommentForm()
+    # if request.method == 'POST':
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         comment = Comment(
+    #             author=form.cleaned_data["author"],
+    #             body=form.cleaned_data["body"],
+    #             post=post
+    #         )
+    #         comment.save()
+    # comments = Comment.objects.filter(post=post)
+    context = {
+        "book": book,
+        "rating_value": rating_value,
+        "num_of_reviews": num_of_reviews
+    }   
+
+    return render(request, "detail.html", context)
 
 
 
