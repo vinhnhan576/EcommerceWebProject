@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta
+			id="meta"
+			name="viewport"
+			content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous" />
+	</head>
+
+	<body>
+		<div class="checkout-result" id="checkout-result">
+			<div
+				class="container d-flex flex-column align-items-center justify-content-center"
+				style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+				<div class="d-flex justify-content-center align-items-center mb-5" style="height: 500px; width: 500px">
+					<img
+						class="position-absolute"
+						style="height: 600px; margin-top: 75px"
+						src="{% static 'images/illustrations/background.png' %}"
+						alt="" />
+					<img
+						class="position-absolute"
+						style="height: 600px"
+						src="{% static 'images/illustrations/alligator_waiting.png' %}"
+						alt="" />
+				</div>
+
+				<p class="mb-4 mt-5" style="font-weight: 600; font-size: 56px; color: #336d47">PLEASE WAIT...</p>
+				<p style="font-weight: 500; font-size: 26px; color: #5ca276">
+					We are verifying your order and prepare other processes for your purchase
+				</p>
+			</div>
+		</div>
+		<div class="checkout-result" id="checkout-result"></div>
+	</body>
+</html>
+
+<script>
+	var result_page = document.getElementById("checkout-result");
+	function succesResult(){
+		result_page.innerHTML = `<div
+				class="container d-flex flex-column align-items-center justify-content-center"
+				style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+				<div class="d-flex justify-content-center align-items-center mb-5" style="height: 500px; width: 500px">
+					<img
+						class="position-absolute"
+						style="height: 600px; margin-top: 75px"
+						src="{% static 'images/illustrations/background.png' %}"
+						alt="" />
+					<img
+						class="position-absolute"
+						style="height: 600px"
+						src="{% static 'images/illustrations/alligator_success.png' %}"
+						alt="" />
+				</div>
+
+				<p class="mb-4 mt-5" style="font-weight: 600; font-size: 56px; color: #336d47">ORDERED SUCCESSFULLY!</p>
+				<p style="font-weight: 500; font-size: 26px; color: #5ca276">
+					We will prepare your order and send you the receipt via email as soon as possible
+				</p>
+			</div>`;
+	}
+	{% comment %} console.log(result_page) {% endcomment %}
+	window.addEventListener(
+		"load",
+		async function () {
+			var url = "{% url 'check_out' %}";
+			await fetch(url, {
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+					// 'X-CSRFToken': csrftoken,
+				},
+				body: JSON.stringify({ email: "{{email}}" }),
+			});
+			setTimeout(succesResult, 2000)
+		},
+		false
+	);
+</script>
+
+{% endblock content %}

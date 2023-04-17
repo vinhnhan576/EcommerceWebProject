@@ -55,6 +55,8 @@ class BookCheckoutView(ListView):
     #     else:
     #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+def checkoutResult(request, email):
+    return render(request, 'checkout_result.html', {'email' : email})
 
 def paymentComplete(request):
     body = json.loads(request.body)
@@ -136,3 +138,6 @@ def CheckOut(request):
         RemoveAll(request)
         print('success')
     return JsonResponse('Checkout completed!', safe=False)
+
+def error404View(request, exception):
+    return render(request, '404.html')
