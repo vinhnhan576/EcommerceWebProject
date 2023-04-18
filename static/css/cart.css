@@ -1,34 +1,21 @@
-.checkout{
-    
-}
-
-.checkout .card-title{
+.cart .card-title{
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 1.5rem;
 }
 
-.checkout .card {
+.cart .card {
     border-radius: 10px;
     margin-bottom: 1.5rem;
 }
 
-.checkout .card-body {
+.cart .card-body {
     padding: 24px;
-}
-
-.checkout-title{
-    font-size: 32px;
-    font-weight: bold;
 }
 
 .card-row{
     margin-left: .75rem;
     margin-right: .75rem;
-}
-
-.card-row-left{
-
 }
 
 .card-row-img{

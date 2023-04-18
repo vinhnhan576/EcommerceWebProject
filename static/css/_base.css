@@ -13,8 +13,8 @@ body {
     background: #f1efe3 !important;
 }
 
-.web.container{
-    max-width: 1360px;
+.web:has(.cart) {
+    width: 1360px;
 }
 
 .web:has(.checkout){

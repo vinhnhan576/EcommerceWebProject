@@ -35,7 +35,6 @@ class SearchResultsListView(ListView):
             Q(title__icontains=query) | Q(author__icontains=query)
         )
 
-
 class BookCheckoutView(ListView):
     model = Book
     template_name = 'checkout.html'
@@ -60,6 +59,9 @@ class BookCheckoutView(ListView):
     #     else:
     #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+def home(request):
+    return render(request, 'home.html')
+
 def checkoutResult(request, email):
     return render(request, 'checkout_result.html', {'email' : email})
 
@@ -71,8 +73,6 @@ def paymentComplete(request):
         product=product
     )
     return JsonResponse('Payment completed!', safe=False)
-
-
 
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
@@ -97,8 +97,6 @@ def book_detail(request, pk):
 
     return render(request, "detail.html", context)
 
-
-
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
     rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
@@ -112,8 +110,6 @@ def book_detail(request, pk):
     }   
 
     return render(request, "detail.html", context)
-
-
 
 @csrf_exempt
 def AddToCar(request):
@@ -141,7 +137,6 @@ def AddToCar(request):
         request.session['cart_subtotal'] += quantity*book.price
     request.session.modified = True
     return JsonResponse('Add completed!', safe=False)
-
 
 def ViewCart(request):
     cart = request.session.get('cart', {})

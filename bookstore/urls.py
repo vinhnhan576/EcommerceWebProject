@@ -1,9 +1,9 @@
 from django.urls import path
-from django.contrib import admin
-from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, checkoutResult, RemoveAll
+from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, checkoutResult, RemoveAll, home
 
 urlpatterns = [
     path('', BooksListView.as_view(), name = 'list'),
+    path('home', home, name = 'home'),
     path('<int:pk>/',book_detail, name = 'detail'),
     path('<int:pk>/checkout/', BookCheckoutView.as_view(), name = 'checkout'),
     # path('checkout/', BookCheckoutView.as_view(), name = 'checkout'),
@@ -15,6 +15,4 @@ urlpatterns = [
     path('remove_all/', RemoveAll,name='remove_all'),
     path('check_out/', CheckOut, name='check_out'),
     path('checkout_result/<str:email>/', checkoutResult, name='checkout_result'),
-
-    path('admin', admin.site.urls)
 ]
