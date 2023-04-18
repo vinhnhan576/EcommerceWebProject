@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Glory:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+.book-detail {
+  background: #f1eee3;
+  font-family: "Glory", sans-serif;
+  color: #37383e;
+}
+
+.row{
+  width: 100%;
+}
+
+p{
+  line-height: 1.5;
+}
+
+.book-detail-upper-right {
+  background: #fdfbf7;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.book-detail-upper-right h4 {
+  font-size: 46px;
+}
+
+.book-cover {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.book-detail-upper img {
+  /* width: 53%; */
+  margin-right: 40px;
+  position: absolute;
+  /* box-shadow: -23px 24px 14px 5px rgba(0,0,0,0.1); */
+  /* height: 127%; */
+  /* box-shadow: -21px 17px 15px -3px rgba(0,0,0,0.1); */
+  box-shadow: -21px 17px 15px -3px rgba(0, 0, 0, 0.1),
+    -21px 26px 15px -3px rgba(0, 0, 0, 0.1);
+
+    width: 250px;
+    height: 375px;
+}
+
+.card-body {
+  background: #f1eee3;
+  padding-top: 0px !important;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.rating-feedback {
+  padding: 0;
+  display: flex;
+}
+.rating-container {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+.rating-number {
+  font-weight: 600;
+  padding-left: 10px;
+}
+.stars i {
+  color: #ffc911;
+}
+
+.feedback-container {
+  padding-left: 13px;
+}
+
+.feedback-text {
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.card-body {
+  font-size: 16px;
+  font-weight: 400;
+  padding-left: 0px;
+  padding-top: 1.5rem;
+}
+
+.card-text-quotes {
+  padding-top: 12px;
+  font-weight: 400;
+}
+
+.quotes-from-books {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+.quotes-author {
+  align-self: flex-end;
+  padding-right: 38px;
+  padding-top: 20px;
+}
+.category-books span {
+  padding: 7px 25px;
+  background: #272a34;
+  color: white;
+  border-radius: 12px;
+  margin-right: 9px;
+}
+.price-books-containers {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.price-books-text-before {
+  font-weight: 600;
+  font-size: 19px;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.price-books-text-after {
+  font-weight: 600;
+  font-size: 38px;
+  margin-top: -10px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.quantity {
+  background: #fdfbf7;
+  border-radius: 7px;
+  border-style: solid;
+  border-width: 1px;
+  width: 144px;
+  padding: 5px;
+}
+.quantity__plus, .quantity__minus{
+  padding: 0px 10px;
+  cursor: pointer;
+}
+.quantity__input{
+  width: 53px;
+  padding: 0 25px;
+
+}
+.add-to-cart {
+  padding-right: 35px;
+}
+
+.add-to-cart button {
+  width: 144px;
+  height: 37px;
+  margin-top: 10px;
+  border-radius: 7px;
+  background: #272a34;
+  border: none;
+}
+
+.description-container {
+  margin-left: 50px;
+}
+.book-detail-lower {
+  background-color: #fdfbf7;
+}
+
+.book-detail-lower p {
+  font-size: 16px;
+  font-weight: 400;
+}
+.book-detail-lower h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.author-container,
+.publish-date-container,
+.language-container {
+  padding-bottom: 50px;
+}
+
+.selection-detail-review-container{
+  padding: 30px 0 17px;
+  margin-left: 0;
+}
+
+.selection-detail-review-container .col-md-5{
+  text-align: center;
+  border-bottom: 1px solid;
+  padding-bottom: 10px;
+  border-bottom-color: #e0dbdb;
+  font-weight: 500;
+}
+
+.selection-detail-review-container .col-md-5:hover{
+  border-bottom: 2px solid;
+  border-bottom-color: #272a34;
+  cursor: pointer;
+  font-weight: 600 !important;
+}
+.border-bottom-clicked {
+  border-bottom: 2px solid !important;
+  border-bottom-color: #272a34 !important; 
+  font-weight: 600 !important;
+}
+
+.review-card-container{
+  display: flex;
+}
+
+.review-card-container img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+
+.selection-reviews-container{
+  display: none;
+  flex-direction: column;
+}
+
+.review-card-container .review-content{
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.review-card-info{
+  padding-left: 25px;
+}
+
+.rating-time .time{
+  float: right;
+  padding-right: 70px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rating i{
+  color:#ffc911;
+}
+
+.rating-time span{
+  font-weight: 600;
+}
+.review {
+  padding: 30px 0;
+}
+

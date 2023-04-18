@@ -31,24 +31,42 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+    
+class User(models.Model):
+    username = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=50)
+    address = models.CharField(max_length=1000, default="Hanoi")
+    phone = models.CharField(max_length=1000, default="0123456789")
+    def __str__(self):
+        return self.user.username
 
 class Review(models.Model):
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
     review = models.TextField()
     rating = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.review
 
 class Order(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    book = models.ForeignKey('Book', on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    # user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    email = models.EmailField(max_length=1000)
+    detail = models.ManyToManyField(Book, through = 'OrderDetail')
     total_price = models.IntegerField(default=100)
     created_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.order
     
+class OrderDetail(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    total_price = models.IntegerField(default=100)
+
+    def __str__(self):
+        return self.orderdetail
+
+
+
