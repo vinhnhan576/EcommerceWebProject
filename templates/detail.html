@@ -8,10 +8,12 @@
 <div class="book-detail container">
 	<div class="row book-detail-upper">
 		<div class="col-md-5 book-cover">
-			<img src="https://dkemhji6i1k0x.cloudfront.net/000_clients/489816/page/489816HeD639gY.png" class="card-img" />
+			<!-- <img src="https://dkemhji6i1k0x.cloudfront.net/000_clients/489816/page/489816HeD639gY.png" class="card-img" /> -->
+			<img src="{{book.cover}}" class="card-img" />
+			<!--             
+             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVqBAIpYFBfWo2y6aymZ0eo_GSNMIP9BL-4w&usqp=CAU" class="card-img" /> -->
 		</div>
 		<div class="col-md-7 grid-margin book-detail-upper-right">
-			<input type="hidden" value="{{ object.pk }}" name="id" id="id" />
 			<div class="card-body" style="font-weight: 400; line-height: 30px">
 				<h4 class="card-title">{{book.title}}</h4>
 				<div class="rating-feedback container">
@@ -32,7 +34,9 @@
 				</div>
 				<div class="quotes-from-books" style="padding: 25px 0">
 					<p class="card-text-quotes" style="line-height: 25px; padding-top: 0">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, minima ab nam deleniti asperiores a
+						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro eius facere vel quis libero, adipisci
+						possimus saepe veritatis assumenda consequatur eaque doloremque illum aspernatur ea ipsum sint, deleniti
+						nostrum velit.
 					</p>
 					<p class="quotes-author">-{{book.author.name}}</p>
 				</div>
@@ -49,21 +53,33 @@
 			<div class="col-md-7">
 				<div class="price-books-containers">
 					<div class="price-books">
+						{% if object.book_available is false %}
 						<div class="price-books-text-before">$50</div>
 						<div class="price-books-text-after">${{book.price}}</div>
+						{% else %}
+						<h4 class="text-danger">Out of Stock !</h4>
+						{% endif %}
 					</div>
 					<div class="add-to-cart">
 						<div class="quantity">
-							<span class="quantity__minus">-</span>
+							<span class="quantity__minus" onclick="decrement()">-</span>
 							<span id="quantity" class="quantity__input">1</span>
-							<span class="quantity__plus">+</span>
+							<span class="quantity__plus" onclick="increment()">+</span>
 						</div>
 						<button class="btn btn-primary" onclick="addItem()">Buy now</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row" style="padding-top: 39px; width: 100%">
+
+		<div class="row selection-detail-review-container" style="width: 100%">
+			<div class="col-md-1"></div>
+			<div class="col-md-5 details-header border-bottom-clicked" onclick="selectionDetail()">The details</div>
+			<div class="col-md-5 review-header" onclick="selectionReview()">Reviews</div>
+			<div class="col-md-1"></div>
+		</div>
+
+		<div class="row selection-detail-container" style="padding-top: 39px; width: 100%">
 			<div class="col-md-6 grid-margin" style="padding-left: 60px">
 				<div class="description-container">
 					<h4 class="description-title">Description</h4>
@@ -87,34 +103,121 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row selection-reviews-container" style="padding-top: 39px; width: 100%">
+			{% for review in reviews %}
+			<div class="row review">
+				<div class="col-md-2 review-card-container"></div>
+				<div class="col-md-10 review-card-container">
+					<img
+						src="https://img.freepik.com/free-photo/portrait-pretty-korean-girl-receive-surprising-news-looking-amazed-happy-camera-standing-blue-background_1258-76005.jpg?w=1060&t=st%3D1681733373~exp%3D1681733973~hmac%3D2d56944b5bf1140d46f84daacb95e73126a09e56344995a6226e0c3f74f70f4c"
+						class="card-img" />
+					<div class="review-card-info" style="width: 100%">
+						<div class="row rating-time">
+							<div class="col-md-6">
+								<div class="rating">
+									{% if review.rating == 1 %}
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									{% elif review.rating == 2 %}
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									{% elif review.rating == 3 %}
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+									{% elif review.rating == 4 %}
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-regular fa-star"></i>
+
+									{% elif review.rating == 5 %}
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									<i class="fa-solid fa-star"></i>
+									{% endif %}
+								</div>
+								<span>{{review.user.username}}</span>
+							</div>
+							<div class="col-md-6">
+								<span class="time">{{review.created_at}}</span>
+							</div>
+						</div>
+						<div class="review-content">{{review.review}}</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
 	</div>
 </div>
 
-<script lang="JavaScript">
+<script>
 	async function addItem() {
-		var url = "{% url 'add_to_cart' %}"
+		var url = "{% url 'add_to_cart' %}";
 		quantity = document.getElementById("quantity").innerHTML;
-				await fetch(url, {
-					method: 'POST',
-					headers: {
-						'content-type': 'application/json',
-						// 'X-CSRFToken': csrftoken,
-					},
-					body: JSON.stringify({ 'id': "{{book.id}}", "quantity" :Number(quantity)})
-				});
+		await fetch(url, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+				// 'X-CSRFToken': csrftoken,
+			},
+			body: JSON.stringify({ id: "{{book.id}}", quantity: Number(quantity) }),
+		});
 
-	      console.log("book added");
-			}
+		console.log("book added");
+	}
+
+	function increment() {
+		console.log("increment");
+		var value = parseInt(document.getElementsByClassName("quantity__input")[0].innerHTML, 10);
+		value = isNaN(value) ? 0 : value;
+		if (value < 10) {
+			value++;
+			document.getElementsByClassName("quantity__input")[0].innerHTML = value;
+		}
+	}
+
+	function decrement() {
+		var value = parseInt(document.getElementsByClassName("quantity__input")[0].innerHTML, 10);
+		value = isNaN(value) ? 0 : value;
+		if (value > 1) {
+			value--;
+			document.getElementsByClassName("quantity__input")[0].innerHTML = value;
+		}
+	}
+	isDetail = false;
+	isReview = false;
+	function selectionDetail() {
+		document.getElementsByClassName("selection-detail-container")[0].style.display = "flex";
+		document.getElementsByClassName("selection-reviews-container")[0].style.display = "none";
+		document.getElementsByClassName("details-header")[0].style.fontWeight = "600";
+		document.getElementsByClassName("review-header")[0].style.fontWeight = "normal";
+		document.getElementsByClassName("details-header")[0].className = "col-md-5 details-header border-bottom-clicked";
+		document.getElementsByClassName("review-header")[0].className = "col-md-5 review-header";
+	}
+
+	function selectionReview() {
+		// document.getElementsByClassName('selection-detail-container')[0].style.backgroundColor = "#f5f5f5";
+		document.getElementsByClassName("selection-detail-container")[0].style.display = "none";
+		document.getElementsByClassName("selection-reviews-container")[0].style.display = "flex";
+		document.getElementsByClassName("details-header")[0].style.fontWeight = "normal";
+		document.getElementsByClassName("review-header")[0].style.fontWeight = "600";
+		document.getElementsByClassName("details-header")[0].className = "col-md-5 details-header";
+		document.getElementsByClassName("review-header")[0].className = "col-md-5 review-header border-bottom-clicked";
+	}
 </script>
 
-{% if object.book_available is True %}
-
-<input type="hidden" value="{{ object.pk }}" name="id" id="id" />
-<input aria-label="quantity" class="input-qty" id="quantity" type="number" value="1" />
-
-<input type="button" class="btn btn-outline-success" value="Buy" onclick="addItem()" />
-<a href="{% url 'cart' %}"> Cart</a>
-<a href="{% url 'remove_all' %}"> Detele</a>
-{% else %}
-<h4 class="text-danger">Out of Stock !</h4>
-{% endif %} {% endblock content %}
+{% endblock content %}

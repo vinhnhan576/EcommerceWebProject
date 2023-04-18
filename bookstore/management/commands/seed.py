@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
-from ...models import Book, Author, Category, Review
-from django.contrib.auth.models import User
+from ...models import Book, Author, Category, Review,User
 import random
 from datetime import date
 
@@ -30,6 +29,7 @@ def clear_data():
     Book.objects.all().delete()
     Author.objects.all().delete()
     Review.objects.all().delete()
+    User.objects.all().delete()
 
 
 def create_category():
@@ -40,6 +40,22 @@ def create_category():
             name=i,
         )
         category.save()
+
+def create_user():
+    """Creates an address object combining different elements from the list"""
+    user_names = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"]
+    password = "123456"
+    phone = "0123456789"
+    address = "123 abc street"
+    for i in user_names:
+        user = User(
+            username=i,
+            password=password,
+            phone=phone,
+            address=address,
+        )
+        user.save()
+
 
 def create_Author():
     """Creates an address object combining different elements from the list"""
@@ -64,7 +80,7 @@ def create_book():
             author = random.choice(Author.objects.all()),
             category = random.choice(Category.objects.all()),
             quantity = random.randint(1, 100),
-            description = "this is the description",
+            description = " Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus possimus hic velit praesentium! Magnam, debitis! Facere, enim qui Laudantium perferendis ab culpa dicta alias. Quibusdam iusto necessitatibus dolorum iste natus iure eum facere ipsum labore inventore molestias sapiente hic perferendis quae, harum magni! Sapiente deserunt voluptatem provident atque eveniet! Sit.",
             price = random.choice(prices),
             #publish date date time
             published_date = date.today(),
@@ -78,7 +94,7 @@ def create_review():
         review = Review(
             review = random.choice(reviews),
             book = random.choice(Book.objects.all()),
-            #user = random.choice(User.objects.all()),
+            user = random.choice(User.objects.all()),
             rating = random.randint(1, 5),
         )
         review.save()
@@ -107,7 +123,8 @@ def run_seed(self, mode):
     if mode == MODE_REFRESH:
         clear_data()
         self.stdout.write('data cleared.')
-        
+    
+    create_user()
     create_category()
     create_Author()
     create_book()

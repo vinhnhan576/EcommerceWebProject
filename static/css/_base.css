@@ -14,7 +14,11 @@ body {
 }
 
 .web:has(.cart) {
-    max-width: 1360px;
+    width: 1360px;
+}
+
+.web:has(.checkout){
+    width: 1360px;
 }
 
 .col-7-5{

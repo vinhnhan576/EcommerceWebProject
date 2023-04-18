@@ -1,0 +1,77 @@
+.sidebar {
+    padding: 16px 0;
+    height: 100%;
+    width: 80px;
+    border-right: 2px solid #dcd9ce;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+a>i {
+    color: #000;
+    font-size: 20px;
+}
+
+.sidebar #logo {
+    font-size: 36px;
+}
+
+.main-content {
+    margin-left: 100px;
+}
+
+.navbar {
+    width: calc(100vw - 120px);
+    height: 60px;
+    left: 90px;
+    position: fixed;
+    z-index: 1;
+    top: 5px;
+    background-color: #f1efe3;
+}
+
+.search-box {
+    width: 656px;
+}
+
+.search-box .search {
+    appearance: none;
+    border: none;
+    background: none;
+    font-size: 16px;
+    color: #777;
+    margin-left: -8px;
+}
+
+.search-box .search:hover i {
+    color: #000;
+    cursor: pointer;
+}
+
+.search-box>input {
+    font-family: 'Cabin', cursive;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-left: 4px;
+    width: 400px;
+    background-color: #f1efe3;
+}
+
+.profile-pic {
+    margin-left: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.web.container {
+    margin-top: 80px;
+    margin-bottom: 16px;
+}
