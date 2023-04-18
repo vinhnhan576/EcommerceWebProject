@@ -17,6 +17,10 @@ body {
     max-width: 1360px;
 }
 
+.web:has(.checkout){
+    width: 1360px;
+}
+
 .col-7-5{
     max-width: 62.5% !important;
 }
