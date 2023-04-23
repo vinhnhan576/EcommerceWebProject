@@ -1,5 +1,5 @@
+from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, checkoutResult, RemoveAll, home, send_verification_code, Confirm, getAllOdersByUser, get_all_categories
 from django.urls import path
-from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, checkoutResult, RemoveAll, home, get_all_categories
 
 urlpatterns = [
     path('', get_all_categories, name = 'list'),
@@ -14,4 +14,10 @@ urlpatterns = [
     path('remove_all/', RemoveAll,name='remove_all'),
     path('check_out/', CheckOut, name='check_out'),
     path('checkout_result/<str:email>/', checkoutResult, name='checkout_result'),
+    path('send_verification/', send_verification_code, name='send_verification'),
+    path('confirm/', Confirm, name='confirm'),
+    path('purchase-history/', getAllOdersByUser, name='purchase-history'),
+
+
+
 ]
