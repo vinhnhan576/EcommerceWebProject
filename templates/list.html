@@ -1,31 +1,102 @@
+{% extends 'base_list.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}" />
 
-{% extends 'base.html' %}
-
-{% block content %}
-
-
-<hr>
-
+<hr />
 
 <div class="row">
-    {% for each in object_list %}
-    <div class="col">
-        <div class="card" style="width: 13rem;">
-            <img src="{{ each.cover }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ each.title|slice:":25"}} ...</h5>
-                <p class="card-text">${{ each.price|floatformat:2 }}</p>                
-                {% if each.book_available is True %}
-                <li class="text-primary">Available</li>
-                {% else %}
-                <li class="text-danger">Out of Stock !</li>
-                {% endif %}<br>
-                <a href="{% url 'detail' each.id %}" class="btn btn-primary">View</a>
-            </div>
+  <div class="col-md-2" style="border-right: 2px solid #dcd9ce; height: 100vh">
+    <h6 class="p-3">Bookies > Flash sale book</h6>
+    <div class="left-side-container" style="overflow-y: auto;">
+      <div class="filter-container">
+        <div class="filter-container-category d-flex">
+          <i class="fa-solid fa-arrow-down-short-wide"></i>
+          <h6>Filter</h6>
+          <i class="fa-solid fa-chevron-down"></i>
         </div>
+        <div class="category-check-container">
+          <h6 class="p-10">Category</h6>
+          <form class="form-check-category-conntainer">
+             {% for each in categories %}
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{each.name}}
+              </label>
+            </div>
+            {% endfor %}
+          </form>
+        </div>
+      </div>
     </div>
-    {% endfor %}
+
+    <div class="price-container">
+      <div class="filter-container-category d-flex">
+        <i class="fa-solid fa-tag"></i>
+        <h6>Price</h6>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="price-filter">
+        <div>100.000vnd - 200.000vnd</div>
+        <div>300.000vnd - 400.000vnd</div>
+        <div>400.000vnd - 500.000vnd</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-8">
+         <div class="header-card">
+          <div>
+          <h5 style="align-self: center; width: 70%; line-height: 2;">Maybe this is why we read, and why in moments of darkness we return to books: to find words for what we already know.</h5>
+          <span>- Alberto Manguel</span>
+          </div>
+         </div>
+      </div>
+      <div class="col-md-4">
+         <div class="card" style="height: 33vh; margin-bottom: 50px;">
+          <img
+            class="card__img"
+            src="https://images.pexels.com/photos/9572625/pexels-photo-9572625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="unsplash random image"
+          />
+      </div>
+      </div>
+    </div>
+    <div class="row" style="margin-left: 10px;">
+      {% for each in books %}
+      <div class="col">
+         <a href="{% url 'detail' each.id %}">
+        <div class="card card__img-container">
+          <img
+            class="card__img"
+            src="{{each.cover}}"
+            alt="unsplash random image"
+          />
+          <div class="card__tags">
+            <span class="card__tag">{{each.category.name}}</span>
+            <div class="card__tag">
+              <i class="fa-solid fa-star" style="padding-right: 5px;"></i>
+            <span>4.5</span>
+            </div>
+          </div>
+        </div>
+        </a>
+        <div class="card__body">
+          <h3 class="card__title">{{each.title}}</h3>
+          <p class="card__date">
+            by {{each.author.name}}
+          </p>
+          <p class="card__cta">{{each.price}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
-

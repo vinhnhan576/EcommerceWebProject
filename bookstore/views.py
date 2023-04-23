@@ -5,8 +5,14 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+<<<<<<< HEAD
+from .models import Book, Order,OrderDetail
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from .models import Book, Order, Review, Category
+=======
 from .models import Book, Order, OrderDetail, Review, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
+>>>>>>> 77014884848374947328111570bcc8fa6fb58740
 from django.urls import reverse_lazy
 from django.db.models import Q  # for search method
 from django.http import JsonResponse
@@ -111,6 +117,12 @@ def book_detail(request, pk):
 
     return render(request, "detail.html", context)
 
+def get_all_categories(request):
+    categories = Category.objects.all()
+    books = Book.objects.all()
+    return render(request, 'list.html', {'categories': categories,
+                                         'books': books})
+
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
     rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
@@ -124,6 +136,7 @@ def book_detail(request, pk):
     }   
 
     return render(request, "detail.html", context)
+
 
 @csrf_exempt
 def AddToCar(request):

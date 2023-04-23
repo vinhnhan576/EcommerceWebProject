@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, checkoutResult, RemoveAll, home
+from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComplete, SearchResultsListView, book_detail, AddToCar, ViewCart, RemoveItem, CheckOut, checkoutResult, RemoveAll, home, get_all_categories
 
 urlpatterns = [
-    path('list', BooksListView.as_view(), name = 'list'),
-    path('', home, name = 'home'),
+    path('', get_all_categories, name = 'list'),
+    path('home', home, name = 'home'),
     path('<int:pk>/',book_detail, name = 'detail'),
     path('<int:pk>/checkout/', BookCheckoutView.as_view(), name = 'checkout'),
     path('complete/', paymentComplete, name = 'complete'),
