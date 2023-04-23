@@ -1,0 +1,233 @@
+:root {
+  --ff-primary: "Open Sans", sans-serif;
+  --ff-accent: "Source Sans Pro", sans-serif;
+
+  --clr-neutral-100: #fff;
+  --clr-neutral-300: #ddd;
+  --clr-neutral-500: #555555;
+  --clr-neutral-800: #111827;
+  --clr-primary: #041964;
+
+  --transition: 250ms ease-in-out;
+}
+
+
+.filter-container-category h6{
+    padding-right: 8px;
+    padding-left: 15px;
+}
+.fa-chevron-down{
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+.category-check-container{
+    padding-left: 35px;
+    padding-top: 10px;
+    padding-bottom: 7px;
+}
+
+.form-check-category-conntainer{
+    padding-top: 5px;
+    font-size: 14px;
+}
+
+.form-check{
+    padding-bottom: 10px;
+}
+
+.left-side-container{
+    border-bottom: 2px solid #dcd9ce;
+    height: 55vh;
+}
+
+.price-container{
+    padding-top: 25px;
+    /* border-bottom: 2px solid #dcd9ce;  */
+    padding-bottom:30px;
+    height: 45vh;
+}
+
+.price-filter div{
+    margin-bottom: 10px;
+    padding: 13px 0;
+    padding-left: 18px;
+    background: #ddddd9;
+    border-radius: 20px;
+
+}
+
+
+.card {
+  position: relative;
+  background-color:   #f6aa67;
+
+  overflow: hidden;
+  border-radius: 0.8em;
+  box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.card:is(:hover, :focus) {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.card:focus-visible {
+  outline: 2px dashed;
+  outline-offset: 0.4em;
+}
+
+.card__img-container {
+  width: 250px;
+  height: 270px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 16 / 9;
+}
+/* image overlay */
+.card__img-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  z-index: 1;
+  transition: 250ms ease-in-out;;
+}
+
+.card__tags {
+  --_pad: 10px;
+  position: absolute;
+  inset: var(--_pad) var(--_pad) auto var(--_pad);
+  display: flex;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  opacity: 0.75;
+  transition: 250ms ease-in-out;;
+}
+
+.card__tag {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+
+  font-size: 14px;
+  text-transform: uppercase;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--clr-neutral-100);
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__body {
+  padding: 1em 1.5em;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  padding-bottom: 15px;
+}
+
+.card__date {
+  font-size: 1rem;
+  padding-bottom: 15px;
+}
+
+.card__cta {
+  position: relative;
+  width: fit-content;
+  margin-top: auto;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+
+
+/* image overlay */
+.card:is(:hover, :focus) .card__img-container::before {
+  opacity: 1;
+}
+
+/* remove underline */
+.card:is(:hover, :focus) .card__cta::before {
+  transform: scale(0);
+}
+
+
+/* show tag */
+.card:is(:hover, :focus) .card__tags {
+  opacity: 1;
+}
+
+.header-card{
+  position: relative; 
+  height: 33vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  border-radius: 15px;
+
+}
+ .header-card::before{
+    position: relative;
+     content: "";
+    border-radius: 15px;
+     height: 33vh; 
+    position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+    opacity: 1;
+  background-color: rgba(28, 27, 27, 0.6);
+
+
+}
+.header-card div{
+    position: relative;
+    height: 90%;
+    width: 100%;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    line-height: 2;
+}
+
+.header-card span{
+    float: right;
+}
+
+.left-side-container::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.left-side-container::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.left-side-container::-webkit-scrollbar-thumb
+{
+	background-color: #e8e5e5;
+}

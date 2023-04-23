@@ -72,7 +72,7 @@ def create_book():
     """Creates an address object combining different elements from the list"""
     book_names = ["The Shining", "Harry Potter", "The Hobbit", "Charlie and the Chocolate Factory", "The Little Mermaid", "A Game of Thrones", "Foundation", "Cosmos", "Astrophysics for People in a Hurry", "Bill Nye's Big Ideas",
                   "A Brief History of Time", "The God Delusion", "Doraemon", "Shin cau be but chi", "Chu be nhut nhat", "The Little Prince", "A pewpew","Aloha"]
-    prices = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    prices = [10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
 
     for i in book_names:
         book = Book(
@@ -85,6 +85,7 @@ def create_book():
             #publish date date time
             published_date = date.today(),
             book_available = True,
+            sold_num = 0,
         )
         book.save()
 
