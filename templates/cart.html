@@ -54,7 +54,16 @@
 							<div class="form-label-group in-border">
 								<input type="text" id="email" class="form-control" placeholder="Floating Label" required />
 								<label for="tt2">Email*</label>
-							</div>
+                                
+						</div>
+                        <div class="form-label-group in-border"><button class="btn btn-primary" onclick="send()">Send</button>       </div>
+                        <div class="form-label-group in-border" id="verification">
+								<input type="text" id="verification" class="form-control" placeholder="Floating Label"  onchange="confirm()" />
+								<label for="tt2">Verification*</label>
+								<p>{{ message }}</p>
+
+
+                                
 						</div>
 					</div>
 					<div class="card">
@@ -194,6 +203,37 @@
 
 		window.location = "../checkout_result/" + email;
 	});
+
+    async function send() {
+		console.log('Sendding')
+		var url = "{% url 'send_verification' %}";
+		email = document.getElementById("email").value;
+		await fetch(url, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+				// 'X-CSRFToken': csrftoken,
+			},
+			body: JSON.stringify({ email: email }),
+		});
+
+		console.log("email sent ",email);
+	}
+	 async function confirm() {
+		var url = "{% url 'confirm' %}";
+		user_input = document.getElementById("verification").value;
+		await fetch(url, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+				// 'X-CSRFToken': csrftoken,
+			},
+			body: JSON.stringify({ user_input:user_input}),
+		});
+
+		console.log("email sent ",user_input);
+	}
 </script>
+
 
 {% endblock content %}

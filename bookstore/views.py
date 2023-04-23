@@ -1,18 +1,21 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from audioop import avg, avgpp
-from django.shortcuts import render 
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Book, Order,OrderDetail
-from django.contrib.auth.mixins import LoginRequiredMixin 
+from .models import Book, Order, OrderDetail
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book, Order, Review
 from django.urls import reverse_lazy
 from django.db.models import Q  # for search method
 from django.http import JsonResponse
 import json
 from django.db.models import Avg
+from django.core.mail import send_mail
+from django.conf import settings
+from django.utils.crypto import get_random_string
 
 
 class BooksListView(ListView):
@@ -34,6 +37,7 @@ class SearchResultsListView(ListView):
         return Book.objects.filter(
             Q(title__icontains=query) | Q(author__icontains=query)
         )
+
 
 class BookCheckoutView(ListView):
     model = Book
@@ -59,11 +63,14 @@ class BookCheckoutView(ListView):
     #     else:
     #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+
 def home(request):
     return render(request, 'home.html')
 
+
 def checkoutResult(request, email):
-    return render(request, 'checkout_result.html', {'email' : email})
+    return render(request, 'checkout_result.html', {'email': email})
+
 
 def paymentComplete(request):
     body = json.loads(request.body)
@@ -74,10 +81,12 @@ def paymentComplete(request):
     )
     return JsonResponse('Payment completed!', safe=False)
 
+
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
-    rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
-    num_of_reviews = Review.objects.filter(book=book).count()    
+    rating_value = Review.objects.filter(
+        book=book).aggregate(avg=Avg('rating'))['avg']
+    num_of_reviews = Review.objects.filter(book=book).count()
     # form = CommentForm()
     # if request.method == 'POST':
     #     form = CommentForm(request.POST)
@@ -93,23 +102,26 @@ def book_detail(request, pk):
         "book": book,
         "rating_value": rating_value,
         "num_of_reviews": num_of_reviews
-    }   
+    }
 
     return render(request, "detail.html", context)
 
+
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
-    rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
-    num_of_reviews = Review.objects.filter(book=book).count()  
+    rating_value = Review.objects.filter(
+        book=book).aggregate(avg=Avg('rating'))['avg']
+    num_of_reviews = Review.objects.filter(book=book).count()
     reviews = Review.objects.filter(book=book)
     context = {
         "book": book,
         "rating_value": rating_value,
         "num_of_reviews": num_of_reviews,
         "reviews": reviews
-    }   
+    }
 
     return render(request, "detail.html", context)
+
 
 @csrf_exempt
 def AddToCar(request):
@@ -132,17 +144,18 @@ def AddToCar(request):
                 'cover': book.cover,
                 'price': book.price,
                 'quantity': quantity,
-                'subtotal':quantity*book.price
+                'subtotal': quantity*book.price
             }
         request.session['cart_subtotal'] += quantity*book.price
     request.session.modified = True
     return JsonResponse('Add completed!', safe=False)
 
+
 def ViewCart(request):
     cart = request.session.get('cart', {})
     subtotal = request.session.get('cart_subtotal')
     return render(request, 'cart.html', {'cart': cart, 'cart_subtotal': subtotal})
-    
+
 
 def RemoveItem(request, item_id):
     cart = request.session.get('cart', {})
@@ -151,12 +164,27 @@ def RemoveItem(request, item_id):
     request.session['cart'] = cart
     return JsonResponse('Remove completed!', safe=False)
 
+
 def RemoveAll(request):
     cart = request.session.get('cart', {})
     cart.clear()
     request.session['cart'] = cart
     request.session['cart_subtotal'] = 0
     return JsonResponse('Remove completed!', safe=False)
+
+def getAllOdersByUser(request,):
+    listorder = []
+    userid = request.session.get('userid')
+    orders = Order.objects.filter(user=userid)
+    for order in orders:
+        listorder.append({
+            
+            'order':order,
+            'listdetail':OrderDetail.objects.filter(order=order)
+        })
+    context = {'listorder': listorder}
+
+    return render(request, "purchase_history.html", context)
 
 @csrf_exempt
 def CheckOut(request):
@@ -182,5 +210,46 @@ def CheckOut(request):
         print('success')
     return JsonResponse('Checkout completed!', safe=False)
 
+
 def error404View(request, exception):
     return render(request, '404.html')
+
+ 
+
+@csrf_exempt
+def send_verification_code(request):
+    request.session.get['code']= ""
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        email = body.get('email')
+    # Tạo mã xác nhận ngẫu nhiên
+        verification_code = get_random_string(length=6)
+        # Gửi email
+        subject = 'Mã xác nhận'
+        message = f'Mã xác nhận của bạn là: {verification_code}'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [email]
+        send_mail(subject, message, from_email, recipient_list)
+        if 'cart' not in request.session:
+            request.session['code'] = {}
+            request.session['code'] = verification_code
+        else:
+            request.session['code'] = verification_code
+    print(request.session['code'])
+
+
+@csrf_exempt
+def Confirm(request):
+    print(request.session.get('code'))
+    if request.method == 'POST':
+        user_input_code = request.POST.get('user_input')  
+        code_verification = request.session.get('code')
+        print(user_input_code, code_verification)
+        if code_verification == user_input_code:
+            message = 'Code verification'
+            print(message)
+            return render(request, 'cart.html', {'message':message})
+        else:
+            message = 'Code not verification'
+            print(message)
+            return render(request, 'cart.html', {'message': message})
