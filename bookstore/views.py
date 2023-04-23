@@ -5,14 +5,12 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-<<<<<<< HEAD
+
 from .models import Book, Order,OrderDetail
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from .models import Book, Order, Review, Category
-=======
 from .models import Book, Order, OrderDetail, Review, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
->>>>>>> 77014884848374947328111570bcc8fa6fb58740
 from django.urls import reverse_lazy
 from django.db.models import Q  # for search method
 from django.http import JsonResponse

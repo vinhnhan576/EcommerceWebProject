@@ -80,14 +80,13 @@
 }
 
 .card__img-container {
-  width: 280px;
-  height: 325px;
+  width: 250px;
+  height: 270px;
   position: relative;
   overflow: hidden;
   isolation: isolate;
   aspect-ratio: 16 / 9;
 }
-
 /* image overlay */
 .card__img-container::before {
   content: "";
@@ -230,5 +229,5 @@
 
 .left-side-container::-webkit-scrollbar-thumb
 {
-	background-color: #d0cece;
+	background-color: #e8e5e5;
 }
