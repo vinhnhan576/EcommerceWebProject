@@ -5,9 +5,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Book, Order,OrderDetail
-from django.contrib.auth.mixins import LoginRequiredMixin 
-from .models import Book, Order, Review
+from .models import Book, Order, OrderDetail, Review, Category
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.db.models import Q  # for search method
 from django.http import JsonResponse
@@ -59,8 +58,23 @@ class BookCheckoutView(ListView):
     #     else:
     #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+from django.db.models import Sum
 def home(request):
-    return render(request, 'home.html')
+    book_num = 5
+    category_num = 4
+    books = Book.objects.order_by('-sold_quantity')[:book_num]
+    top_books = []
+    for book in books:
+        rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
+        top_books.append({'book': book, 'rating': rating_value})
+    
+    categories = Category.objects.annotate(sold_quantity=Sum("book__sold_quantity")).order_by("-sold_quantity")[:category_num]
+    top_categories = []
+    for category in categories:
+        print(category.__getattribute__('sold_quantity'))
+        top_categories.append({'category_info' : category, 'books' : Book.objects.filter(category=category).order_by("-sold_quantity")[:book_num]}) 
+
+    return render(request, 'home.html', {"top_books": top_books, "top_categories": top_categories})
 
 def checkoutResult(request, email):
     return render(request, 'checkout_result.html', {'email' : email})
@@ -171,11 +185,13 @@ def CheckOut(request):
         for productID, product in cart.items():
             product1 = Book.objects.get(pk=productID)
             print("before", product1.quantity)
+            quantity = int(product.get('quantity'))
             order_detail = order.detail.through.objects.create(
-                order=order, book=product1, quantity=int(product.get('quantity')), total_price=product['subtotal'])
+                order=order, book=product1, quantity=quantity, total_price=product['subtotal'])
             order_detail.save()
             product2 = Book.objects.get(pk=productID)
-            product2.quantity -= int(product.get('quantity'))
+            product2.sold_quantity += quantity
+            product2.quantity -= quantity
             product2.save()
             print("after", product2.quantity)
         RemoveAll(request)

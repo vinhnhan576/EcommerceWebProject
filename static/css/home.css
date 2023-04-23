@@ -1,0 +1,95 @@
+/* CAROUSEL CONTROLS */
+
+.top-books-carousel .carousel-control-prev-icon, .top-books-carousel .carousel-control-next-icon{
+    width: 0;
+}
+
+.top-books-carousel .carousel-control-prev, .top-books-carousel .carousel-control-next {
+    position: relative;
+    width: 40px;
+    height: 110px;
+    border-radius: 0.375rem;
+    opacity: .6;
+    transition: all 0.2s ease-in-out;
+}
+
+.top-books-carousel .carousel-control-prev::before, .top-books-carousel .carousel-control-next::before {
+    font-weight: 800;
+    font-size: 72px;
+    font-family: 'Nanum Myeongjo', serif;
+    color: #000;
+}
+
+.top-books-carousel .carousel-control-prev::before {
+    content: "<";
+}
+
+.top-books-carousel .carousel-control-prev:hover {
+    padding-right: 10px;
+}
+
+.top-books-carousel .carousel-control-next::before {
+    content: ">";
+}
+
+.top-books-carousel .carousel-control-next:hover {
+    padding-left: 10px;
+}
+
+.home a{
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.home .row.w80{
+    width: 80%;
+    margin: auto;
+}
+
+.home .row.banner{
+    width: 100%;
+}
+
+.home .card{
+    border-radius: 12px;
+}
+
+.home .card-title{
+    font-family: 'Ysabeau', sans-serif;
+
+}
+
+.home .card-body{
+    padding: 1.5rem 0;
+}
+
+.text-stroke{
+    color: white;
+  background-color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.standing-book{
+    box-shadow: -0px 5px 4px #fff, -5px 4px 2px #111111, -5px 9px 2px #000000fc, -8px 15px 15px #00000063; 
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(359deg);
+  }
+}
+
+.rotate-infinite {
+  animation-duration: 50s;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.mt-4-5{
+    margin-top: 2.25rem;
+}
