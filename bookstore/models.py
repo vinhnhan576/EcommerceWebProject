@@ -13,6 +13,7 @@ class Book(models.Model):
     price = models.FloatField(null=True, blank=True)
     published_date = models.DateField()
     quantity = models.IntegerField()
+    sold_quantity = models.IntegerField()
     book_available = models.BooleanField(default=False)
 
     def __str__(self):

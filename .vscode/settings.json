@@ -1,0 +1,6 @@
+{
+    "java.format.settings.url": "eclipse-formatter.xml",
+    "[django-html]": {
+        "editor.formatOnSave": true
+    }
+}
