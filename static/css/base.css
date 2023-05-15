@@ -23,12 +23,12 @@ a>i {
 }
 
 .navbar {
-    width: calc(100% - 100px);
+    width: calc(100vw - 120px);
     height: 60px;
-    margin: 0 0 16px;
+    left: 90px;
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: 5px;
     background-color: #f1efe3;
 }
 
@@ -72,6 +72,6 @@ a>i {
 }
 
 .web.container {
-    margin-top: 32px;
+    margin-top: 80px;
     margin-bottom: 16px;
 }
