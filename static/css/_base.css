@@ -27,6 +27,10 @@ body {
     min-width: 1840px;
 }
 
+.web:has(.list){
+    max-width: 90%;
+}
+
 .col-7-5{
     max-width: 62.5% !important;
 }

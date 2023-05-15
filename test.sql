@@ -1,0 +1,1 @@
+INSERT INTO bookstore_user (id, username, password, address, phone) VALUES (1, 'vnhan', '123456', 'test', '1234567890')

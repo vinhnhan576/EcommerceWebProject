@@ -2,8 +2,8 @@ from .views import BooksListView, BooksDetailView, BookCheckoutView, paymentComp
 from django.urls import path
 
 urlpatterns = [
-    path('', get_all_categories, name = 'list'),
-    path('home', home, name = 'home'),
+    path('list', get_all_categories, name = 'list'),
+    path('', home, name = 'home'),
     path('<int:pk>/',book_detail, name = 'detail'),
     path('<int:pk>/checkout/', BookCheckoutView.as_view(), name = 'checkout'),
     path('complete/', paymentComplete, name = 'complete'),
