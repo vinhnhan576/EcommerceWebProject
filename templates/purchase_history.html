@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta
+			id="meta"
+			name="viewport"
+			content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/purchase_history.css' %}" />
+	</head>
+
+	<body>
+        <div class="container">
+	<div class="col-md-12">
+    	<div class="panel panel-default">
+				<div class="panel-heading">
+					PURCHASE HISTORY
+				</div>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+		    <th></th>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Total</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        {% for orders in listorder %}
+        <tr data-toggle="collapse" data-target="#demo{{orders.order.id}}" class="accordion-toggle">
+           <td><button class="btn btn-default btn-xs"><span class="fas fa-eye"></span></button></td>
+        <td class="orderid">{{orders.order.id}}</td>
+        <td>{{ orders.order.created_at }}</td>
+        <td>{{ orders.order.total_price }}</td>
+        <td>2</td>
+    </tr>
+        <tr>
+            <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo{{orders.order.id}}"> 
+              <table class="table table-striped">
+                      <thead>
+                        <tr class="info">
+							<th>Detail ID</th>
+							<th>Name</th>
+							<th>Quantity</th>		
+							<th>Subtotal </th>	
+						</tr>
+					</thead>			
+						<tbody>
+							{% for detail in orders.listdetail.all %}
+                                <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
+								<td>{{detail.id}}</td>
+								<td>{{detail.book}} </td>
+								<td> {{detail.quantity}}</td>
+								<td> {{detail.total_price}}</td>
+									</tr>  
+                                {% endfor %}    	
+                      </tbody>
+               	</table>     
+              </div> 
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>        
+          </div> 
+        
+      </div>
+	</div>
+	</body>
+</html>
+{% endblock content %}

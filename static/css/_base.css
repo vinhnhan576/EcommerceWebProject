@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau:wght@200;300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+:root{
+    --primary-color: #f1efe3;
+    --secondary-color: #ffffff;
+}
 
 *{
     font-family: 'Poppins', sans-serif;
@@ -13,12 +18,13 @@ body {
     background: #f1efe3 !important;
 }
 
-.web.container{
-    max-width: 1360px;
+.web:has(.cart) {
+    width: 1360px;
 }
 
-.web:has(.checkout){
-    width: 1360px;
+.web:has(.home){
+    max-width: 1840px;
+    min-width: 1840px;
 }
 
 .col-7-5{

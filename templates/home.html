@@ -1,0 +1,398 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<meta id="meta" name="viewport"
+		content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+	{% comment %} <script type="text/javascript" src="{% static 'js/home.js' %}"></script> {% endcomment %}
+</head>
+
+<body>
+	<div class="home">
+		{% comment %} <div class="row banner mb-5" style="height: 500px">
+			<div class="col-8">
+				<p class="" style="font-size: 72px; font-weight: 600">BOOK</p>
+			</div>
+			<div class="col-4 bg-white">
+				<img class="position-absolute" style="top: 200px; z-index: 10;"
+					src="{% static 'images/illustrations/banner-book.png' %}" />
+				<p class="" style="font-size: 72px; font-weight: 600; color: var(--primary-color)">STORE</p>
+			</div>
+		</div> {% endcomment %}
+		<div class="row w80 mb-5">
+			<div class="col-md-12 grid-margin stretched-card">
+				<div class="card">
+					<div class="position-absolute py-4"
+						style="width: 100%; height: 100%; overflow: hidden; opacity: 0.25">
+						<img src="{% static 'images/backgrounds/radial-stripes.png' %}"
+							class="position-absolute rotate-infinite" style="top: -680px; left: -560px;" />
+					</div>
+					<div class="card-body">
+						<div id="top-books" class="carousel slide top-books-carousel position-static"
+							data-ride="carousel">
+							<div class="d-flex position-absolute w-100 h-100 justify-content-between align-items-center"
+								style="padding: 0 80px;">
+								<a class="carousel-control-prev" href="#top-books" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								</a>
+								<a class="carousel-control-next" href="#top-books" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								</a>
+							</div>
+							<div class="row w80">
+								{% comment %} <p class="card-title">BOOKS OF THE MONTH</p> {% endcomment %}
+							</div>
+							<div class="row m-auto" style="width:100%">
+								<div class="carousel-inner justify-content-center">
+									<div class="carousel-item active">
+										<div class="row w80">
+											<div class="col-4 d-flex flex-column align-items-end">
+												<div class="" style="width:267px; z-index:2;">
+													<img src="{% static 'images/placeholders/standing-book-placeholder.png' %}"
+														style="height: 400px;" />
+													<img src={{ top_books.0.book.cover }} class="position-absolute"
+														style="height: 266px;
+														width: 232px;
+														/* object-fit: cover; */
+														right: 24px;
+														top: 67px;
+														transform: rotateZ(-24deg) rotateY(42deg) rotateX(-13deg);" />
+												</div>
+											</div>
+											<div class="col-8" style="padding-right: 60px;">
+												<div class="mt-3">
+													<h3 class="font-weight-500 mt-5 mb-1" style="font-weight: 600">
+														{{top_books.0.book.author.name}}'s</h3>
+													<div class="output mb-2 pb-2"
+														style="word-break: break-word; word-wrap: break-word; font-weight: 700; line-height:1">
+														{{ top_books.0.book.title }}
+														<div class="position-absolute"
+															style="height: 65px; top: 55px; right: 30px; font-size: 18px; color: #fdc70f">
+															{% if top_books.0.rating < 0.5 %}
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif top_books.0.rating < 1.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif top_books.0.rating < 2.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif top_books.0.rating < 3.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif top_books.0.rating < 4.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% else %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															{% endif %}</div>
+													</div>
+													<p class="mb-2 ml-2" style="font-size: 21px;">
+														{{ top_books.0.book.description }}
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									{% for book in top_books %}
+									{% if forloop.first %}
+									{% else %}
+									<div class="carousel-item">
+										<div class="row w80">
+											<div class="col-4 d-flex flex-column align-items-end">
+												<div class="" style="width:267px; z-index:2;">
+													<img src="{% static 'images/placeholders/standing-book-placeholder.png' %}"
+														style="height: 400px;" />
+													<img src={{book.book.cover}} class="position-absolute" style="height: 266px;
+														width: 232px;
+														/* object-fit: cover; */
+														right: 24px;
+														top: 67px;
+														transform: rotateZ(-24deg) rotateY(42deg) rotateX(-13deg);" />
+												</div>
+											</div>
+											<div class="col-8" style="padding-right: 60px;">
+												<div class="mt-3">
+													<h3 class="font-weight-500 mt-5 mb-1" style="font-weight: 600">
+														{{book.book.author.name}}'s</h3>
+													<div class="output mb-2 pb-2"
+														style="word-break: break-word; word-wrap: break-word; font-weight: 700; line-height:1">
+														{{ book.book.title }}
+														<div class="position-absolute"
+															style="height: 65px; top: 55px; right: 30px; font-size: 18px; color: #fdc70f">
+															{% if book.rating < 0.5 %}
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif book.rating < 1.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif book.rating < 2.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif book.rating < 3.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% elif book.rating < 4.5 %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-regular fa-star"></i>
+															{% else %}
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															<i class="fa-solid fa-star"></i>
+															{% endif %}</div>
+													</div>
+													<p class="mb-2 ml-2" style="font-size: 21px;">
+														{{ book.book.description }}
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									{% endif %}
+									{% endfor %}
+									<div class="carousel-item">
+										<div class="row w80">
+											<div class="col-4 d-flex flex-column align-items-end">
+												{% comment %} <div class="position-absolute py-4 "
+													style="z-index:1; left:0;">
+													<p class="mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+													<p class="text-stroke mb-2"
+														style="font-size:36px; font-weight:700; font-family: 'Oswald', serif;">
+														BOOK O' THE
+														MONTH</p>
+												</div> {% endcomment %}
+												<div class="" style="width:267px; z-index:2;">
+													<img src="{% static 'images/placeholders/standing-book-placeholder.png' %}"
+														style="height: 400px;" />
+													<img src="{% static 'images/books/covers/little-red-riding-hood.jpg' %}"
+														class="position-absolute" style="height: 266px;
+														width: 232px;
+														/* object-fit: cover; */
+														right: 24px;
+														top: 67px;
+														transform: rotateZ(-24deg) rotateY(42deg) rotateX(-13deg);" />
+												</div>
+											</div>
+											<div class="col-8">
+												{% comment %} <div class="row"> {% endcomment %}
+													{% comment %} <div class="col-md-12"> {% endcomment %}
+														<div class="mt-3">
+															<h3 class="font-weight-500 mt-5 mb-0"
+																style="font-weight: 600">The Brothers Grimm's</h3>
+															{% comment %} <h1 class="border-bottom mb-2 pb-2"
+																style="font-size: 72px; font-weight: 700; line-height:1">
+																SOMETHING NASTY IN THE WOODSHED</h1> {% endcomment %}
+															<div class="output mb-2 pb-2"
+																style="word-break: break-word; word-wrap: break-word; font-weight: 700; line-height:1">
+																LITTLE RED RIDING HOOD
+																<div class="position-absolute"
+																	style="height: 65px; top: 55px; right: 30px; font-size: 18px; color: #fdc70f">
+																	<i class="fa-solid fa-star mr-1"></i><i
+																		class="fa-solid fa-star mr-1"></i><i
+																		class="fa-solid fa-star mr-1"></i><i
+																		class="fa-solid fa-star mr-1"></i><i
+																		class="fa-regular fa-star mr-1"></i></div>
+																{% comment %} <img
+																	src="{% static 'images/common/sparkle2.png' %}"
+																	class="position-absolute"
+																	style="height: 65px; top:0;" /> {% endcomment %}
+															</div>
+															<p class="mb-2 mb-xl-0" style="font-size: 21px;">
+																The total number of sessions within the date range. It
+																is the
+																period time a user is actively engaged with your
+																website, page or app, etc
+															</p>
+														</div>
+														{% comment %} </div> {% endcomment %}
+													{% comment %} </div> {% endcomment %}
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% for category in top_categories %}
+		<div class="row w80 mb-2">
+			<div class="col-12 mb-4 stretched-card">
+				<div class="card" style="background: transparent; border: 0">
+					<div class="card-body">
+						<div class="row mb-5 d-flex align-items-center justify-content-between">
+							<p class="card-title ml-5" style="font-size: 24px; font-weight: 600">Top
+								{{ category.category_info.name }} Books</p>
+							<a href="#" class="card-title mr-5" style="font-size: 24px; font-weight: 600">More</a>
+						</div>
+						<div class="row d-flex align-items-center justify-content-center">
+							{% for book in category.books %}
+							<div class="col-2 d-flex flex-column justify-content-center align-items-center mx-3 px-0"
+								style="cursor: pointer;">
+								<a href="/{{ book.id }}" style="text-decoration: none; color: #000;">
+									<img src={{ book.cover }} class="standing-book"
+										style="height: 260px; width: 170px; " />
+									<p class="mt-4-5 px-3"
+										style="text-align:center; height: 32px; width: 100%;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break:break-word; font-size: 16px; font-weight: 400">
+										{{ book.title }}</p>
+								</a>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		{% comment %} <div class="row w80 mb-2">
+			<div class="col-12 mb-4 stretched-card">
+				<div class="card" style="background: transparent; border: 0">
+					<div class="card-body">
+						<div class="row mb-5 d-flex align-items-center justify-content-between">
+							<p class="card-title ml-5" style="font-size: 24px; font-weight: 600">Top abc Books</p>
+							<a href="#" class="card-title mr-5" style="font-size: 24px; font-weight: 600">More</a>
+						</div>
+						<div class="row d-flex align-items-center justify-content-center">
+							<div class="col-2 d-flex flex-column justify-content-center align-items-center mx-3 px-0"
+								style="cursor: pointer;"><img
+									src="{% static 'images/books/covers/something-nasty-in-the-woodshed.jpg' %}"
+									class="standing-book" style="height: 260px; width: 170px; " />
+								<p class="mt-4-5 px-3"
+									style="text-align:center; height: 32px; width: 100%;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break:break-word; font-size: 16px; font-weight: 400">
+									Something
+									Nasty In The Woodshed asdaskj isajdoiasjdo josai dsaiodjoi</p>
+							</div>
+							<div class="col-2 d-flex flex-column justify-content-center align-items-center mx-3 px-0"
+								style="cursor: pointer;"><img
+									src="{% static 'images/books/covers/something-nasty-in-the-woodshed.jpg' %}"
+									class="standing-book" style="height: 260px; width: 170px; " />
+								<p class="mt-4-5 px-3"
+									style="text-align:center; height: 32px; width: 100%;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break:break-word; font-size: 16px; font-weight: 400">
+									Something
+									Nasty In The Woodshed asdaskj isajdoiasjdo josai dsaiodjoi</p>
+							</div>
+							<div class="col-2 d-flex flex-column justify-content-center align-items-center mx-3 px-0"
+								style="cursor: pointer;"><img
+									src="{% static 'images/books/covers/something-nasty-in-the-woodshed.jpg' %}"
+									class="standing-book" style="height: 260px; width: 170px; " />
+								<p class="mt-4-5 px-3"
+									style="text-align:center; height: 32px; width: 100%;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break:break-word; font-size: 16px; font-weight: 400">
+									Something
+									Nasty In The Woodshed asdaskj isajdoiasjdo josai dsaiodjoi</p>
+							</div>
+							<div class="col-2 d-flex flex-column justify-content-center align-items-center mx-3 px-0"
+								style="cursor: pointer;"><img
+									src="{% static 'images/books/covers/something-nasty-in-the-woodshed.jpg' %}"
+									class="standing-book" style="height: 260px; width: 170px; " />
+								<p class="mt-4-5 px-3"
+									style="text-align:center; height: 32px; width: 100%;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break:break-word; font-size: 16px; font-weight: 400">
+									Something
+									Nasty In The Woodshed asdaskj isajdoiasjdo josai dsaiodjoi</p>
+							</div>
+							<div class="col-2 d-flex flex-column justify-content-center align-items-center mx-3 px-0"
+								style="cursor: pointer;"><img
+									src="{% static 'images/books/covers/something-nasty-in-the-woodshed.jpg' %}"
+									class="standing-book" style="height: 260px; width: 170px; " />
+								<p class="mt-4-5 px-3"
+									style="text-align:center; height: 32px; width: 100%;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break:break-word; font-size: 16px; font-weight: 400">
+									Something
+									Nasty In The Woodshed asdaskj isajdoiasjdo josai dsaiodjoi</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> {% endcomment %}
+	</div>
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function () {
+		$('.output').each(function (i, obj) {
+			var wordCount = $(obj).text().trim().length;
+			$(obj).css('fontSize', 1 / Math.sqrt(wordCount) * 2.875 * 100);
+		})
+	});
+</script>
+
+{% endblock content %}

@@ -74,4 +74,5 @@ a>i {
 .web.container {
     margin-top: 80px;
     margin-bottom: 16px;
+    padding-left: 80px;
 }
