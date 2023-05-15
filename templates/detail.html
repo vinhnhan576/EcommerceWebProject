@@ -118,8 +118,8 @@
 				<div class="price-books-containers">
 					<div class="price-books">
 						{% if object.book_available is false %}
-						<div class="price-books-text-before">$50</div>
-						<div class="price-books-text-after">${{book.price}}</div>
+						<div class="price-books-text-before">50.000 vnd</div>
+						<div class="price-books-text-after">{{book.price}} vnd</div>
 						{% else %}
 						<h4 class="text-danger">Out of Stock !</h4>
 						{% endif %}
@@ -174,6 +174,7 @@
 				<div class="col-md-2 review-card-container"></div>
 				<div class="col-md-10 review-card-container">
 					<img
+						style="object-fit: cover"
 						src="https://img.freepik.com/free-photo/portrait-pretty-korean-girl-receive-surprising-news-looking-amazed-happy-camera-standing-blue-background_1258-76005.jpg?w=1060&t=st%3D1681733373~exp%3D1681733973~hmac%3D2d56944b5bf1140d46f84daacb95e73126a09e56344995a6226e0c3f74f70f4c"
 						class="card-img" />
 					<div class="review-card-info" style="width: 100%">
