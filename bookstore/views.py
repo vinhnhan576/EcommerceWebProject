@@ -127,6 +127,9 @@ def book_detail(request, pk):
 def get_all_categories(request):
     categories = Category.objects.all()
     books = Book.objects.all()
+    #convert books.price to int
+    for book in books:
+        book.price = int(book.price)
 
     category_query = request.GET.get('category')
     if category_query:
@@ -145,6 +148,7 @@ def get_all_categories(request):
         if ca:
             if 'all' in ca:
                 books = Book.objects.all()
+                
             else:
             # filter books by category
                 books = Book.objects.filter(category__in=ca)
@@ -152,6 +156,7 @@ def get_all_categories(request):
             books = Book.objects.all()
             
         for book in books:
+           book.price = int(book.price)
            rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
            if rating_value == None:
                 rating_value = 0
