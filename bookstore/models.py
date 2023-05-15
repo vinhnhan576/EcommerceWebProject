@@ -37,6 +37,8 @@ class Author(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=100, default="user")
+    email = models.EmailField(max_length=100, default="user@gmail.com")
     password = models.CharField(max_length=50)
     address = models.CharField(max_length=1000, default="Hanoi")
     phone = models.CharField(max_length=1000, default="0123456789")

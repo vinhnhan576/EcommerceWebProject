@@ -25,11 +25,11 @@ class Command(BaseCommand):
 
 def clear_data():
     """Deletes all the table data"""
+    User.objects.all().delete()
     Category.objects.all().delete()
     Book.objects.all().delete()
     Author.objects.all().delete()
     Review.objects.all().delete()
-    User.objects.all().delete()
 
 
 def create_category():
@@ -43,16 +43,18 @@ def create_category():
 
 def create_user():
     """Creates an address object combining different elements from the list"""
-    user_names = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"]
+    names = ["Laura", "Linda", "Lisa", "Liz", "Lynn", "Mandy", "Maria", "Martha", "Mary", "Megan", "Peter", "Philip", "Richard", "Robert", "Ryan", "Sam", "Sean", "Sebastian", "Simon", "Stephen", "Steve", "Stewart", "Thomas", "Tim", "Trevor", "Victor", "Warren", "William", "Zachary"]
     password = "123456"
     phone = "0123456789"
     address = "123 abc street"
-    for i in user_names:
+    for i in names:
         user = User(
-            username=i,
+            username=i+"123",
+            name=i,
             password=password,
             phone=phone,
             address=address,
+            email=i+"@gmail.com",
         )
         user.save()
 
@@ -85,7 +87,7 @@ def create_book():
             #publish date date time
             published_date = date.today(),
             book_available = True,
-            sold_num = 0,
+            sold_quantity = 0,
         )
         book.save()
 
@@ -125,9 +127,9 @@ def run_seed(self, mode):
         clear_data()
         self.stdout.write('data cleared.')
     
-    create_user()
-    create_category()
-    create_Author()
+    # create_user()
+    # create_category()
+    # create_Author()
     create_book()
     create_review()
     #Order()
