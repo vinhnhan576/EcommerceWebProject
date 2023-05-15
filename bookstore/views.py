@@ -243,7 +243,7 @@ def error404View(request, exception):
 
 @csrf_exempt
 def send_verification_code(request):
-    request.session.get['code']= ""
+    # request.session.get['code']= ""
     if request.method == 'POST':
         body = json.loads(request.body)
         email = body.get('email')
