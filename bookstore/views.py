@@ -127,6 +127,38 @@ def book_detail(request, pk):
 def get_all_categories(request):
     categories = Category.objects.all()
     books = Book.objects.all()
+
+    category_query = request.GET.get('category')
+    if category_query:
+        books = Book.objects.filter(category__name=category_query)
+
+    for book in books:
+        rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
+        if rating_value == None:
+            rating_value = 0
+        else:
+            rating_value = round(rating_value, 1)
+        book.rating_value = rating_value
+        
+    if request.method == 'POST':
+        ca = request.POST.getlist('category')
+        if ca:
+            if 'all' in ca:
+                books = Book.objects.all()
+            else:
+            # filter books by category
+                books = Book.objects.filter(category__in=ca)
+        else:
+            books = Book.objects.all()
+            
+        for book in books:
+           rating_value = Review.objects.filter(book=book).aggregate(avg=Avg('rating'))['avg']
+           if rating_value == None:
+                rating_value = 0
+           else:
+                rating_value = round(rating_value, 1)
+           book.rating_value = rating_value
+
     return render(request, 'list.html', {'categories': categories,
                                          'books': books})
 
@@ -134,6 +166,10 @@ def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
     rating_value = Review.objects.filter(
         book=book).aggregate(avg=Avg('rating'))['avg']
+    if rating_value == None:
+        rating_value = 0
+    else:
+        rating_value = round(rating_value, 1)
     num_of_reviews = Review.objects.filter(book=book).count()
     reviews = Review.objects.filter(book=book)
     context = {

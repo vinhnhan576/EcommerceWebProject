@@ -19,11 +19,75 @@
 				<div class="rating-feedback container">
 					<div class="rating-container">
 						<div class="stars">
+							{% if rating_value == 0 %}
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value < 1 %}
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value == 1 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value < 2 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							
+						{% elif rating_value == 2 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+
+						{% elif rating_value < 3 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value == 3 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value < 4 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value == 4 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						{% elif rating_value < 5 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+						{% elif rating_value == 5 %}
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
+						{% endif %}
 						</div>
 						<span class="rating-number">{{rating_value}}</span>
 					</div>
@@ -149,7 +213,7 @@
 									<i class="fa-solid fa-star"></i>
 									{% endif %}
 								</div>
-								<span>{{review.user.username}}</span>
+								<span>{{review.user.name}}</span>
 							</div>
 							<div class="col-md-6">
 								<span class="time">{{review.created_at}}</span>
