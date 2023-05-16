@@ -134,8 +134,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Địa chỉ SMTP server
 EMAIL_PORT = 587  # Cổng của SMTP server
 EMAIL_HOST_USER = 'tbinh7469@gmail.com'  # Tài khoản email của bạn
-EMAIL_HOST_PASSWORD = 'avnsspmqtvyytudi'  # Mật khẩu của tài khoản email
-EMAIL_USE_TLS = True  # Sử dụng TLS khi kết nối với SMTP server
+EMAIL_HOST_PASSWORD = 'sqqxuxvhysvihfnm'
 
 # Cấu hình email gửi đi mặc định
 DEFAULT_FROM_EMAIL = 'bookstore@gmail.com'  # Địa chỉ email gửi đi mặc định
