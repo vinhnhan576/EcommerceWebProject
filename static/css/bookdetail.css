@@ -251,3 +251,97 @@ p{
   padding: 30px 0;
 }
 
+.review-input {
+  position:relative;   
+  padding: 15px 55px 15px 40px;
+  line-height: 1.15;
+  min-height: 70px;
+  margin: 7px auto 0px;
+  color:black;
+  background:#ffffff;
+  border-radius: 30px;box-shadow:	 -2px 3px .125rem rgba(0, 0, 0, .1);
+}
+
+.review-input:focus {
+    outline: none;
+}
+
+.review-input:before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 7px;
+    left: -8px;
+    height: 20px;
+    border-left: 20px solid #ffffff;
+    border-bottom-right-radius: 16px 14px;
+    -webkit-transform: translate(0, -2px);
+  
+}
+
+.review-input:after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 7px;
+    left: 4px;
+    width: 26px;
+    height: 20px;
+    background: #fdfbf7;
+    border-top-right-radius: 14px;
+    -webkit-transform: translate(-30px, -2px);
+    box-shadow: -0.15rem 0 0 inset rgba(0, 0, 0, .1);
+}
+
+  .rating-group {
+    display: inline-flex;
+  }
+  
+  /* make hover effect work properly in IE */
+  .rating__icon {
+    pointer-events: none;
+  }
+  
+  /* hide radio inputs */
+  .rating__input {
+   position: absolute !important;
+   left: -9999px !important;
+  }
+  
+  /* hide 'none' input from screenreaders */
+  .rating__input--none {
+    display: none
+  }
+
+  /* set icon padding and size */
+  .rating__label {
+    cursor: pointer;
+    padding: 0 0.1em;
+  }
+  
+  /* set default star color */
+  .rating__icon--star {
+    color: #ffc911;
+  }
+
+  /* if any input is checked, make its following siblings grey */
+  .rating__input:checked ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+  
+  /* make all stars orange on rating group hover */
+  .rating-group:hover .rating__label .rating__icon--star {
+    color: orange;
+  }
+
+  /* make hovered input's following siblings grey on hover */
+  .rating__input:hover ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+
+.send-review{
+position: absolute;
+    bottom: 15px;
+    right: 135px;
+    cursor: pointer;
+}

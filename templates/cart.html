@@ -2,208 +2,207 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<title></title>
-		<meta
-			id="meta"
-			name="viewport"
-			content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-			crossorigin="anonymous" />
-		<link rel="stylesheet" type="text/css" href="{% static 'css/floating-labels.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}" />
-	</head>
+<head>
+	<title></title>
+	<meta id="meta" name="viewport"
+		content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 
-	<body>
-		<form class="cart" id="form">
-			<div class="row">
-				<div class="col-8 col-7-5 grid-margin mt-4 mb-3 ml-2" style="font-size: 42px; font-weight: 500">Checkout</div>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/floating-labels.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}" />
+</head>
+
+<body>
+	<form class="cart" id="form">
+		<div class="row">
+			<div class="col-8 col-7-5 grid-margin mt-4 mb-3 ml-2" style="font-size: 42px; font-weight: 500">Checkout
 			</div>
-			<div class="row">
-				<div class="col-8 col-7-5 grid-margin">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Contact information</h4>
-							<div class="row">
-								<div class="col-8 grid-margin">
-									<div class="form-label-group in-border">
-										<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-										<label for="tt2">Name*</label>
-									</div>
-								</div>
-								<div class="col-4 grid-margin">
-									<div class="form-label-group in-border">
-										<select class="custom-select" id="ttsel2">
-											<option selected="1">Male</option>
-											<option value="2">Female</option>
-											<option value="3">Other</option>
-										</select>
-										<label for="ttsel2">Gender</label>
-									</div>
+		</div>
+		<div class="row">
+			<div class="col-8 col-7-5 grid-margin">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Contact information</h4>
+						<div class="row">
+							<div class="col-8 grid-margin">
+								<div class="form-label-group in-border">
+									<input type="text" id="tt2" class="form-control" placeholder="Floating Label"
+										required />
+									<label for="tt2">Name*</label>
 								</div>
 							</div>
+							<div class="col-4 grid-margin">
+								<div class="form-label-group in-border">
+									<select class="custom-select" id="ttsel2">
+										<option selected="1">Male</option>
+										<option value="2">Female</option>
+										<option value="3">Other</option>
+									</select>
+									<label for="ttsel2">Gender</label>
+								</div>
+							</div>
+						</div>
 
-							<div class="form-label-group in-border">
-								<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-								<label for="tt2">Phone number*</label>
-							</div>
-							<div class="form-label-group in-border">
-								<input type="text" id="email" class="form-control" placeholder="Floating Label" required />
-								<label for="tt2">Email*</label>
-                                
+						<div class="form-label-group in-border">
+							<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
+							<label for="tt2">Phone number*</label>
 						</div>
-                        <!-- <div class="form-label-group in-border"><button class="btn btn-primary" onclick="send()">Send</button>       </div>
-                        <div class="form-label-group in-border" id="verification">
-								<input type="text" id="verification" class="form-control" placeholder="Floating Label"  onchange="confirm()" />
-								<label for="tt2">Verification*</label>
-								<p>{{ message }}</p>       
-						</div> -->
-					</div>
-					</div>
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Shipping address</h4>
-							<div class="form-label-group in-border">
-								<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-								<label for="tt2">Street name & house number*</label>
-							</div>
-							<div class="form-label-group in-border">
-								<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-								<label for="tt2">District*</label>
-							</div>
-							<div class="row">
-								<div class="col-7 grid-margin">
-									<div class="form-label-group in-border">
-										<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-										<label for="tt2">City*</label>
-									</div>
-								</div>
-								<div class="col-5 grid-margin">
-									<div class="form-label-group in-border">
-										<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-										<label for="tt2">Postal code*</label>
-									</div>
+						<div class="row">
+							<div class="col-10 grid-margin">
+								<div class="form-label-group in-border">
+									<input type="text" id="email" class="form-control" placeholder="Floating Label"
+										required />
+									<label for="tt2">Email*</label>
 								</div>
 							</div>
+							<div class="col-2 grid-margin" style="padding-left: 0.2rem">
+								<div class="form-label-group in-border" style="margin-top: 0.5rem;"><button
+										class="btn btn-primary" onclick="send()" type="button">Send</button> </div>
+							</div>
+						</div>
+						<div class="form-label-group in-border" id="verification">
+							<input type="text" id="verification" class="form-control" placeholder="Floating Label"
+								onchange="confirm()" />
+							<label for="tt2">Verification*</label>
+							<p>{{ message }}</p>
 						</div>
 					</div>
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Payment method</h4>
-							<div class="row">
-								<div class="col-4 grid-margin justify-content-center d-flex">
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Shipping address</h4>
+						<div class="form-label-group in-border">
+							<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
+							<label for="tt2">Street name & house number*</label>
+						</div>
+						<div class="form-label-group in-border">
+							<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
+							<label for="tt2">District*</label>
+						</div>
+						<div class="row">
+							<div class="col-7 grid-margin">
+								<div class="form-label-group in-border">
+									<input type="text" id="tt2" class="form-control" placeholder="Floating Label"
+										required />
+									<label for="tt2">City*</label>
+								</div>
+							</div>
+							<div class="col-5 grid-margin">
+								<div class="form-label-group in-border">
+									<input type="text" id="tt2" class="form-control" placeholder="Floating Label"
+										required />
+									<label for="tt2">Postal code*</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Payment method</h4>
+						<div class="row">
+							<div class="col-4 grid-margin justify-content-center d-flex">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="flexRadioDefault"
+										id="flexRadioDefault2" checked />
+									<label class="form-check-label" for="flexRadioDefault2"> Cash on delivery
+									</label>
+								</div>
+							</div>
+							<div class="col-4 grid-margin justify-content-center d-flex flex-column">
+								<div class="justify-content-center d-flex">
 									<div class="form-check">
-										<input
-											class="form-check-input"
-											type="radio"
-											name="flexRadioDefault"
-											id="flexRadioDefault2"
-											checked />
-										<label class="form-check-label" for="flexRadioDefault2"> Cash on delivery </label>
+										<input class="form-check-input" type="radio" name="flexRadioDefault"
+											id="flexRadioDefault1" disabled />
+										<label class="form-check-label" for="flexRadioDefault1"> Online payment
+										</label>
 									</div>
 								</div>
-								<div class="col-4 grid-margin justify-content-center d-flex flex-column">
-									<div class="justify-content-center d-flex">
-										<div class="form-check">
-											<input
-												class="form-check-input"
-												type="radio"
-												name="flexRadioDefault"
-												id="flexRadioDefault1"
-												disabled />
-											<label class="form-check-label" for="flexRadioDefault1"> Online payment </label>
-										</div>
-									</div>
-									<p class="text-center">(Currently unavailable)</p>
-								</div>
-								<div class="col-4 grid-margin justify-content-center d-flex flex-column">
-									<div class="justify-content-center d-flex">
-										<div class="form-check">
-											<input
-												class="form-check-input"
-												type="radio"
-												name="flexRadioDefault"
-												id="flexRadioDefault1"
-												disabled />
-											<label class="form-check-label" for="flexRadioDefault1"> Mastercard </label>
-										</div>
-									</div>
-									<p class="text-center">(Currently unavailable)</p>
-								</div>
+								<p class="text-center">(Currently unavailable)</p>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-4 col-4-5 grid-margin">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Your Order</h4>
-							{% for product_id, product in cart.items %}
-							<div class="card-row d-flex justify-content-between mb-5">
-								<div class="card-row-left d-flex w-100">
-									<img class="card-row-img mr-2" src="{{product.cover}}" alt="" />
-									<div class="d-flex flex-column justify-content-between" style="width: 79%">
-										<p class="card-row-title">{{ product.name }}</p>
-
-										<div class="d-flex justify-content-between">
-											<div>
-												<p class="card-row-author">{{ product.author }}</p>
-												<p class="card-row-quantity mt-2">x{{ product.quantity }}</p>
-											</div>
-											<div class="d-flex align-items-end">
-												<p class="card-row-price">{{ product.price }} vnd</p>
-											</div>
-										</div>
+							<div class="col-4 grid-margin justify-content-center d-flex flex-column">
+								<div class="justify-content-center d-flex">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="flexRadioDefault"
+											id="flexRadioDefault1" disabled />
+										<label class="form-check-label" for="flexRadioDefault1"> Mastercard </label>
 									</div>
 								</div>
+								<p class="text-center">(Currently unavailable)</p>
 							</div>
-							{% endfor %}
-							<div class="dashed-line"></div>
-							<h4 class="card-title">Price</h4>
-							<div class="card-row d-flex justify-content-between mb-3">
-								<p class="card-row-fee">Subtotal</p>
-								<p class="card-row-cost opacity-100">{{cart_subtotal}}</p>
-							</div>
-							<div class="card-row d-flex justify-content-between mb-3">
-								<p class="card-row-fee">VAT</p>
-								<p class="card-row-cost">0</p>
-							</div>
-							<div class="card-row d-flex justify-content-between mb-2.75">
-								<p class="card-row-fee">Shipment cost</p>
-								<p class="card-row-cost">0</p>
-							</div>
-							<div class="dashed-line o-80"></div>
-							<div class="card-row d-flex justify-content-between mb-5 mt-3">
-								<p class="card-row-fee" style="font-size: 18px; font-weight: 600; opacity: 0.8">Grand total</p>
-								<p class="card-row-cost" style="font-size: 20px; opacity: 0.8">{{cart_subtotal}} vnd</p>
-							</div>
-							<input class="btn btn-lg btn-primary w-100" type="submit" value="Order now" />
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
-	</body>
+			<div class="col-4 col-4-5 grid-margin">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Your Order</h4>
+						{% for product_id, product in cart.items %}
+						<div class="card-row d-flex justify-content-between mb-5">
+							<div class="card-row-left d-flex w-100">
+								<img class="card-row-img mr-2" src="{{product.cover}}" alt="" />
+								<div class="d-flex flex-column justify-content-between" style="width: 79%">
+									<p class="card-row-title">{{ product.name }}</p>
+
+									<div class="d-flex justify-content-between">
+										<div>
+											<p class="card-row-author">{{ product.author }}</p>
+											<p class="card-row-quantity mt-2">x{{ product.quantity }}</p>
+										</div>
+										<div class="d-flex align-items-end">
+											<p class="card-row-price">{{ product.price }} vnd</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="dashed-line"></div>
+						<h4 class="card-title">Price</h4>
+						<div class="card-row d-flex justify-content-between mb-3">
+							<p class="card-row-fee">Subtotal</p>
+							<p class="card-row-cost opacity-100">{{cart_subtotal}}</p>
+						</div>
+						<div class="card-row d-flex justify-content-between mb-3">
+							<p class="card-row-fee">VAT</p>
+							<p class="card-row-cost">0</p>
+						</div>
+						<div class="card-row d-flex justify-content-between mb-2.75">
+							<p class="card-row-fee">Shipment cost</p>
+							<p class="card-row-cost">0</p>
+						</div>
+						<div class="dashed-line o-80"></div>
+						<div class="card-row d-flex justify-content-between mb-5 mt-3">
+							<p class="card-row-fee" style="font-size: 18px; font-weight: 600; opacity: 0.8">Grand
+								total</p>
+							<p class="card-row-cost" style="font-size: 20px; opacity: 0.8">{{cart_subtotal}} vnd</p>
+						</div>
+						<input class="btn btn-lg btn-primary w-100" type="submit" value="Order now" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+
 </html>
 
 <script>
-	console.log("111");
 	console.log("{{request.session.cart.items}}");
 	const form = document.getElementById("form");
 	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		email = document.getElementById("email").value;
-		
+
 
 		window.location = "../checkout_result/" + email;
 	});
 
-    async function send() {
-		console.log('Sendding')
+	async function send() {
+		console.log('Sending')
 		var url = "{% url 'send_verification' %}";
 		email = document.getElementById("email").value;
 		await fetch(url, {
@@ -212,12 +211,14 @@
 				"content-type": "application/json",
 				// 'X-CSRFToken': csrftoken,
 			},
-			body: JSON.stringify({ email: email }),
+			body: JSON.stringify({
+				email: email
+			}),
 		});
 
-		console.log("email sent ",email);
+		console.log("email sent ", email);
 	}
-	 async function confirm() {
+	async function confirm() {
 		var url = "{% url 'confirm' %}";
 		user_input = document.getElementById("verification").value;
 		await fetch(url, {
@@ -226,12 +227,15 @@
 				"content-type": "application/json",
 				// 'X-CSRFToken': csrftoken,
 			},
-			body: JSON.stringify({ user_input:user_input}),
+			body: JSON.stringify({
+				user_input: user_input
+			}),
 		});
 
-		console.log("email sent ",user_input);
+		console.log("email sent ", user_input);
 	}
 </script>
+
 
 
 {% endblock content %}

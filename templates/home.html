@@ -31,7 +31,7 @@
 			<div class="col-md-12 grid-margin stretched-card">
 				<div class="card">
 					<div class="position-absolute py-4"
-						style="width: 100%; height: 100%; overflow: hidden; opacity: 0.25">
+						style="width: 100%; height: 100%; overflow: hidden; opacity: 0.45">
 						<img src="{% static 'images/backgrounds/radial-stripes.png' %}"
 							class="position-absolute rotate-infinite" style="top: -680px; left: -560px;" />
 					</div>
@@ -301,7 +301,7 @@
 						<div class="row mb-5 d-flex align-items-center justify-content-between">
 							<p class="card-title ml-5" style="font-size: 24px; font-weight: 600">Top
 								{{ category.category_info.name }} Books</p>
-							<a href="#" class="card-title mr-5" style="font-size: 24px; font-weight: 600">More</a>
+							<a href="/list?category={{category.category_info.name}}" class="card-title mr-5" style="font-size: 24px; font-weight: 600" >More</a>
 						</div>
 						<div class="row d-flex align-items-center justify-content-center">
 							{% for book in category.books %}

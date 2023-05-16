@@ -3,8 +3,8 @@
 
 <hr />
 
-<div class="row">
-  <div class="col-md-2" style="border-right: 2px solid #dcd9ce; height: 100vh">
+<div class="list row">
+<div class="col-md-2" style="border-right: 2px solid #dcd9ce; height: 100vh; max-width: 20.83%; flex-basis: auto;">
     <h6 class="p-3">Bookies > Flash sale book</h6>
     <div class="left-side-container" style="overflow-y: auto;">
       <div class="filter-container">
@@ -15,20 +15,35 @@
         </div>
         <div class="category-check-container">
           <h6 class="p-10">Category</h6>
-          <form class="form-check-category-conntainer">
+          <form class="form-check-category-conntainer" action="/list" method="post">
+            {% csrf_token %}
+             <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="all"
+                id="all"
+                name="category"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                All
+              </label>
+            </div>
              {% for each in categories %}
             <div class="form-check">
               <input
                 class="form-check-input"
                 type="checkbox"
-                value=""
-                id="flexCheckDefault"
+                value={{each.id}}
+                id={{each.id}}
+                name="category"
               />
               <label class="form-check-label" for="flexCheckDefault">
                 {{each.name}}
               </label>
             </div>
             {% endfor %}
+            <button type="submit" class="btn btn-primary" style="display: none;">Submit</button>
           </form>
         </div>
       </div>
@@ -41,13 +56,13 @@
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="price-filter">
-        <div>100.000vnd - 200.000vnd</div>
-        <div>300.000vnd - 400.000vnd</div>
-        <div>400.000vnd - 500.000vnd</div>
+        <div>100.000 vnd - 200.000 vnd</div>
+        <div>300.000 vnd - 400.000 vnd</div>
+        <div>400.000 vnd - 500.000 vnd</div>
       </div>
     </div>
   </div>
-  <div class="col-md-10">
+  <div class="col-md-10" style="max-width: 79.17%">
     <div class="row">
       <div class="col-md-8">
          <div class="header-card">
@@ -81,7 +96,7 @@
             <span class="card__tag">{{each.category.name}}</span>
             <div class="card__tag">
               <i class="fa-solid fa-star" style="padding-right: 5px;"></i>
-            <span>4.5</span>
+            <span>{{each.rating_value}}</span>
             </div>
           </div>
         </div>
@@ -91,7 +106,7 @@
           <p class="card__date">
             by {{each.author.name}}
           </p>
-          <p class="card__cta">{{each.price}}</p>
+          <p class="card__cta">{{each.price}} vnd</p>
         </div>
       </div>
       {% endfor %}
