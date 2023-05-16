@@ -121,9 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_DIR=os.path.join(BASE_DIR,'static')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS=[STATIC_DIR]
+STATICFILES_DIRS = [STATIC_DIR]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -141,3 +141,6 @@ EMAIL_USE_TLS = True  # Sử dụng TLS khi kết nối với SMTP server
 # Cấu hình email gửi đi mặc định
 DEFAULT_FROM_EMAIL = 'bookstore@gmail.com'  # Địa chỉ email gửi đi mặc định
 SERVER_EMAIL = 'bookstore@gmail.com'  # Địa chỉ email của server
+
+# Tạo user
+AUTH_USER_MODEL = 'users.User'

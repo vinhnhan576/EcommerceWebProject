@@ -16,9 +16,11 @@
 
 <body class="min-vh-100 d-flex justify-content-center align-items-center">
     <div class="container">
-        <form action="" id="form">
+        <form method="POST" id="form">
             
-            <h1>SIGN UP</h1>
+            <h1>SIGN IN</h1>
+
+            {% csrf_token %}
 
             <!-- Username -->
             <div class="field-container">
@@ -26,31 +28,23 @@
                 <span class="error"></span>
             </div>
 
-            <!-- Email -->
-            <div class="field-container">
-                <input type="email" id="email" name="email" placeholder="Email">
-                <span class="error"></span>
-            </div>
-
             <!-- Password -->
             <div class="field-container">
-                <input type="password" id="password" name="email" placeholder="Password">
-                <span class="error"></span>
-            </div>
-
-            <!-- Confirm password -->
-            <div class="field-container">
-                <input type="password" id="cpassword" name="cpassword" placeholder="Confirm password">
+                <input type="password" id="password" name="password" placeholder="Password">
                 <span class="error"></span>
             </div>
 
             <!-- Submit button -->
             <div class="button">
-                <input type="submit" value="Register">
+                <input type="submit" value="Login" id="submitBtn">
+            </div>
+
+            <div class="other">
+                Not a member? <a href="{% url 'register' %}">Register</a>
             </div>
         </form>
     </div>
-    <script defer src="./register.js"></script>
+    <script defer src="{% static 'js/login.js' %}"></script>
 </body>
 
 </html>

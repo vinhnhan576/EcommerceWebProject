@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from EcommerceWebProject.settings import AUTH_USER_MODEL
 
 
 # Create your models here.
@@ -35,14 +35,14 @@ class Author(models.Model):
         return self.name
 
 
-class User(models.Model):
-    username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=50)
-    address = models.CharField(max_length=1000, default="Hanoi")
-    phone = models.CharField(max_length=1000, default="0123456789")
+# class User(models.Model):
+#     username = models.CharField(max_length=50, unique=True)
+#     password = models.CharField(max_length=50)
+#     address = models.CharField(max_length=1000, default="Hanoi")
+#     phone = models.CharField(max_length=1000, default="0123456789")
 
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 
 class Review(models.Model):
@@ -50,14 +50,14 @@ class Review(models.Model):
     review = models.TextField()
     rating = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.review
 
 
 class Order(models.Model):
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     email = models.EmailField(max_length=1000)
     detail = models.ManyToManyField(Book, through='OrderDetail')
     total_price = models.IntegerField(default=100)
