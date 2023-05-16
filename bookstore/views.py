@@ -169,6 +169,7 @@ def get_all_categories(request):
 
 def book_detail(request, pk):
     book = Book.objects.get(pk=pk)
+    book.price = int(book.price)
     rating_value = Review.objects.filter(
         book=book).aggregate(avg=Avg('rating'))['avg']
     if rating_value == None:
@@ -214,6 +215,15 @@ def AddToCar(request):
     request.session.modified = True
     return JsonResponse('Add completed!', safe=False)
 
+@csrf_exempt
+def sendReview(request):
+    body = json.loads(request.body)
+    Review.objects.create(review=body['review'],
+                          rating=body['rating'],
+                          created_at=body['created_at'],
+                          book_id=body['book_id'],
+                          user_id=body['user_id'])
+    return JsonResponse('Add completed!', safe=False)
 
 def ViewCart(request):
     cart = request.session.get('cart', {})
@@ -284,7 +294,7 @@ def error404View(request, exception):
 
 @csrf_exempt
 def send_verification_code(request):
-    request.session.get['code']= ""
+    # request.session.get['code']= ""
     if request.method == 'POST':
         body = json.loads(request.body)
         email = body.get('email')

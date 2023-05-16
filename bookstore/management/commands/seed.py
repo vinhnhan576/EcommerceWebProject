@@ -127,9 +127,9 @@ def run_seed(self, mode):
         clear_data()
         self.stdout.write('data cleared.')
     
-    # create_user()
-    # create_category()
-    # create_Author()
+    create_user()
+    create_category()
+    create_Author()
     create_book()
     create_review()
     #Order()
