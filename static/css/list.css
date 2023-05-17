@@ -11,6 +11,14 @@
   --transition: 250ms ease-in-out;
 }
 
+.col-width-2-5{
+  width: 20.83%;
+}
+
+.col-width-9-5{
+  width: 79.17%;
+}
+
 
 .filter-container-category h6{
     padding-right: 8px;

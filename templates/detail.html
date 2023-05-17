@@ -19,23 +19,93 @@
 				<div class="rating-feedback container">
 					<div class="rating-container">
 						<div class="stars">
+							{% if rating_value == 0 %}
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value < 1 %}
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value == 1 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value < 2 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+
+							{% elif rating_value == 2 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+
+							{% elif rating_value < 3 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value == 3 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value < 4 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value == 4 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							{% elif rating_value < 5 %}
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star-half-stroke"></i>
+							{% elif rating_value == 5 %}
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
 							<i class="fa-solid fa-star"></i>
+							{% endif %}
 						</div>
 						<span class="rating-number">{{rating_value}}</span>
 					</div>
 					<div class="feedback-container">
 						<i class="fa-regular fa-comment-dots"></i>
-						<span class="feedback-text">{{num_of_reviews}} reviews</span>
+						<span class="feedback-text">{{num_of_reviews}} {% if num_of_reviews <= 1 %}
+							review
+							{% else %}
+							reviews
+							{% endif %}</span>
 					</div>
 				</div>
 				<div class="quotes-from-books" style="padding: 25px 0">
 					<p class="card-text-quotes" style="line-height: 25px; padding-top: 0">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro eius facere vel quis libero, adipisci
-						possimus saepe veritatis assumenda consequatur eaque doloremque illum aspernatur ea ipsum sint, deleniti
+						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro eius facere vel quis libero,
+						adipisci
+						possimus saepe veritatis assumenda consequatur eaque doloremque illum aspernatur ea ipsum sint,
+						deleniti
 						nostrum velit.
 					</p>
 					<p class="quotes-author">-{{book.author.name}}</p>
@@ -54,8 +124,8 @@
 				<div class="price-books-containers">
 					<div class="price-books">
 						{% if object.book_available is false %}
-						<div class="price-books-text-before">$50</div>
-						<div class="price-books-text-after">${{book.price}}</div>
+						<div class="price-books-text-before">50.000 vnd</div>
+						<div class="price-books-text-after">{{book.price}} vnd</div>
 						{% else %}
 						<h4 class="text-danger">Out of Stock !</h4>
 						{% endif %}
@@ -75,7 +145,7 @@
 		<div class="row selection-detail-review-container" style="width: 100%">
 			<div class="col-md-1"></div>
 			<div class="col-md-5 details-header border-bottom-clicked" onclick="selectionDetail()">The details</div>
-			<div class="col-md-5 review-header" onclick="selectionReview()">Reviews</div>
+			<div class="col-md-5 review-header" onclick="selectionReview()">Reviews ({{num_of_reviews}})</div>
 			<div class="col-md-1"></div>
 		</div>
 
@@ -104,12 +174,52 @@
 			</div>
 		</div>
 
-		<div class="row selection-reviews-container" style="padding-top: 39px; width: 100%">
-			{% for review in reviews %}
+		<div class="row selection-reviews-container" style="padding-top: 20px; margin-bottom: 50px; width: 100%">
+			<div class="row" style="margin-bottom: 30px;">
+				<div class="col-md-2 review-card-container"></div>
+				<div class="col-md-10 review-card-container">
+					<img style="margin-top: 30px; object-fit: cover"
+						src="https://img.freepik.com/free-photo/portrait-pretty-korean-girl-receive-surprising-news-looking-amazed-happy-camera-standing-blue-background_1258-76005.jpg?w=1060&t=st%3D1681733373~exp%3D1681733973~hmac%3D2d56944b5bf1140d46f84daacb95e73126a09e56344995a6226e0c3f74f70f4c"
+						class="card-img" />
+					<div class="review-card-info" style="width: 80%;">
+						<div class="row rating-time">
+							<div class="col-md-6">
+								<div class="rating-group">
+									<input disabled checked class="rating__input rating__input--none" name="rating"
+										id="rating-none" value="0" type="radio">
+									<label aria-label="1 star" class="rating__label" for="rating-1"><i
+											class="rating__icon rating__icon--star fa fa-star"></i></label>
+									<input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
+									<label aria-label="2 stars" class="rating__label" for="rating-2"><i
+											class="rating__icon rating__icon--star fa fa-star"></i></label>
+									<input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
+									<label aria-label="3 stars" class="rating__label" for="rating-3"><i
+											class="rating__icon rating__icon--star fa fa-star"></i></label>
+									<input class="rating__input" name="rating" id="rating-3" value="3" type="radio">
+									<label aria-label="4 stars" class="rating__label" for="rating-4"><i
+											class="rating__icon rating__icon--star fa fa-star"></i></label>
+									<input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
+									<label aria-label="5 stars" class="rating__label" for="rating-5"><i
+											class="rating__icon rating__icon--star fa fa-star"></i></label>
+									<input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+								</div>
+								<span>{{review.user.name}}</span>
+							</div>
+							<div class="col-md-6">
+								<span class="time">{{review.created_at}}</span>
+							</div>
+						</div>
+						<div contenteditable="true" class="review-input" id="review-input">
+						</div>
+						<i class="fa-solid fa-paper-plane send-review" onclick="sendReview()"></i>
+					</div>
+				</div>
+			</div>
+			{% for review in reviews reversed %}
 			<div class="row review">
 				<div class="col-md-2 review-card-container"></div>
 				<div class="col-md-10 review-card-container">
-					<img
+					<img style="object-fit: cover"
 						src="https://img.freepik.com/free-photo/portrait-pretty-korean-girl-receive-surprising-news-looking-amazed-happy-camera-standing-blue-background_1258-76005.jpg?w=1060&t=st%3D1681733373~exp%3D1681733973~hmac%3D2d56944b5bf1140d46f84daacb95e73126a09e56344995a6226e0c3f74f70f4c"
 						class="card-img" />
 					<div class="review-card-info" style="width: 100%">
@@ -149,7 +259,7 @@
 									<i class="fa-solid fa-star"></i>
 									{% endif %}
 								</div>
-								<span>{{review.user.username}}</span>
+								<span>{{review.user.name}}</span>
 							</div>
 							<div class="col-md-6">
 								<span class="time">{{review.created_at}}</span>
@@ -174,10 +284,31 @@
 				"content-type": "application/json",
 				// 'X-CSRFToken': csrftoken,
 			},
-			body: JSON.stringify({ id: "{{book.id}}", quantity: Number(quantity) }),
+			body: JSON.stringify({
+				id: "{{book.id}}",
+				quantity: Number(quantity)
+			}),
 		});
 
 		console.log("book added");
+	}
+
+	async function sendReview() {
+		var url = "{% url 'send_review' %}";
+		await fetch(url, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({
+				review: document.getElementById("review-input").innerHTML,
+				rating: document.querySelector('input[name="rating"]:checked').value,
+				created_at: Date.now(),
+				book_id: "{{book.id}}",
+				user_id: 1,
+			}),
+		});
+		console.log("review sent");
 	}
 
 	function increment() {
@@ -200,6 +331,7 @@
 	}
 	isDetail = false;
 	isReview = false;
+
 	function selectionDetail() {
 		document.getElementsByClassName("selection-detail-container")[0].style.display = "flex";
 		document.getElementsByClassName("selection-reviews-container")[0].style.display = "none";

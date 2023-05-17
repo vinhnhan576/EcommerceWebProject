@@ -26,11 +26,11 @@ class Command(BaseCommand):
 
 def clear_data():
     """Deletes all the table data"""
+    User.objects.all().delete()
     Category.objects.all().delete()
     Book.objects.all().delete()
     Author.objects.all().delete()
     Review.objects.all().delete()
-    User.objects.all().delete()
 
 
 def create_category():
@@ -44,16 +44,18 @@ def create_category():
 
 def create_user():
     """Creates an address object combining different elements from the list"""
-    user_names = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"]
+    names = ["Laura", "Linda", "Lisa", "Liz", "Lynn", "Mandy", "Maria", "Martha", "Mary", "Megan", "Peter", "Philip", "Richard", "Robert", "Ryan", "Sam", "Sean", "Sebastian", "Simon", "Stephen", "Steve", "Stewart", "Thomas", "Tim", "Trevor", "Victor", "Warren", "William", "Zachary"]
     password = "123456"
     phone = "0123456789"
     address = "123 abc street"
-    for i in user_names:
+    for i in names:
         user = User(
-            username=i,
+            username=i+"123",
+            name=i,
             password=password,
             phone=phone,
             address=address,
+            email=i+"@gmail.com",
         )
         user.save()
 
@@ -70,10 +72,22 @@ def create_Author():
         author.save()
 
 def create_book():
-    """Creates an address object combining different elements from the list"""
-    book_names = ["The Shining", "Harry Potter", "The Hobbit", "Charlie and the Chocolate Factory", "The Little Mermaid", "A Game of Thrones", "Foundation", "Cosmos", "Astrophysics for People in a Hurry", "Bill Nye's Big Ideas",
-                  "A Brief History of Time", "The God Delusion", "Doraemon", "Shin cau be but chi", "Chu be nhut nhat", "The Little Prince", "A pewpew","Aloha"]
+    #top 30 sách hay nhất mọi thời đại
+    book_names = [
+    "The Very Hungry Caterpillar",
+    "Where the Wild Things Are",
+    "Goodnight Moon",
+    "Oh, the Places You'll Go!",
+    "The Cat in the Hat",
+    "Charlotte's Web",
+    "Harry Potter and the Sorcerer's Stone",
+    "Green Eggs and Ham",
+    "Corduroy",
+    "The Lion, the Witch, and the Wardrobe"
+    ]
+
     prices = [10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+    #
 
     for i in book_names:
         book = Book(
@@ -85,8 +99,9 @@ def create_book():
             price = random.choice(prices),
             #publish date date time
             published_date = date.today(),
+
             book_available = True,
-            sold_num = 0,
+            sold_quantity = 0,
         )
         book.save()
 
@@ -97,7 +112,7 @@ def create_review():
             review = random.choice(reviews),
             book = random.choice(Book.objects.all()),
             user = random.choice(User.objects.all()),
-            rating = random.randint(1, 5),
+            rating = 4,
         )
         review.save()
 
@@ -126,10 +141,10 @@ def run_seed(self, mode):
         clear_data()
         self.stdout.write('data cleared.')
     
-    create_user()
-    create_category()
-    create_Author()
-    create_book()
+    # create_user()
+    # create_category()
+    # create_Author()
+    # create_book()
     create_review()
-    #Order()
+    # #Order()
     

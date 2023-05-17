@@ -28,7 +28,7 @@ body {
 }
 
 .web:has(.list){
-    max-width: 90%;
+    max-width: 95% !important;
 }
 
 .col-7-5{
