@@ -24,11 +24,14 @@ body {
 
 .web:has(.home){
     max-width: 1840px;
-    min-width: 1840px;
 }
 
 .web:has(.list){
     max-width: 95% !important;
+}
+
+.web:has(.purchase-history){
+    padding-left: 15px !important;
 }
 
 .col-7-5{
