@@ -1,7 +1,10 @@
+import sys, os
+sys.path.insert(0, os.path.abspath('....'))
 from django.core.management.base import BaseCommand
-from ...models import Book, Author, Category, Review,User
+from bookstore.models import Book, Author, Category, Review
 import random
 from datetime import date
+from users.models import User
 
 # python manage.py seed --mode=refresh
 
@@ -43,19 +46,21 @@ def create_category():
 
 def create_user():
     """Creates an address object combining different elements from the list"""
-    names = ["Laura", "Linda", "Lisa", "Liz", "Lynn", "Mandy", "Maria", "Martha", "Mary", "Megan", "Peter", "Philip", "Richard", "Robert", "Ryan", "Sam", "Sean", "Sebastian", "Simon", "Stephen", "Steve", "Stewart", "Thomas", "Tim", "Trevor", "Victor", "Warren", "William", "Zachary"]
+    first_names = ["Laura", "Linda", "Lisa", "Liz", "Lynn", "Mandy", "Maria", "Martha", "Mary", "Megan", "Peter", "Philip", "Richard", "Robert", "Ryan", "Sam", "Sean", "Sebastian", "Simon", "Stephen", "Steve", "Stewart", "Thomas", "Tim", "Trevor", "Victor", "Warren", "William", "Zachary"]
+    last_names = ["Smith", "Johnson", "Johns", "William", "Brown", "Miller", "Davis", "Lopez", "Martin", "Lee", "Nguyen", "Le", "Clark", "Lewis", "Young", "Allen", "Wright", "Scott", "Adams", "Nelson"]
     password = "123456"
     phone = "0123456789"
     address = "123 abc street"
-    for i in names:
+    for i in first_names:
         user = User(
             username=i+"123",
-            name=i,
-            password=password,
+            first_name=i,
+            last_name=random.choice(last_names),
             phone=phone,
             address=address,
             email=i+"@gmail.com",
         )
+        user.set_password(password)
         user.save()
 
 
@@ -140,10 +145,10 @@ def run_seed(self, mode):
         clear_data()
         self.stdout.write('data cleared.')
     
-    # create_user()
+    create_user()
     # create_category()
     # create_Author()
     # create_book()
-    create_review()
+    # create_review()
     # #Order()
     

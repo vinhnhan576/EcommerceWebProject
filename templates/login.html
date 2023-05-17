@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}" />
+</head>
+
+<body class="min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+        <form method="POST" id="form">
+            
+            <h1>SIGN IN</h1>
+
+            {% csrf_token %}
+
+            <!-- Username -->
+            <div class="field-container">
+                <input type="text" id="username" name="username" placeholder="Username">
+                <span class="error"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="field-container">
+                <input type="password" id="password" name="password" placeholder="Password">
+                <span class="error"></span>
+            </div>
+
+            <!-- Submit button -->
+            <div class="button">
+                <input type="submit" value="Login" id="submitBtn">
+            </div>
+
+            <div class="other">
+                Not a member? <a href="{% url 'register' %}">Register</a>
+            </div>
+        </form>
+    </div>
+    <script defer src="{% static 'js/login.js' %}"></script>
+</body>
+
+</html>

@@ -18,7 +18,7 @@ urlpatterns = [
     path('send_verification/', send_verification_code, name='send_verification'),
     path('confirm/', Confirm, name='confirm'),
     path('purchase-history/', getAllOdersByUser, name='purchase-history'),
-    path('send_verification/', send_verification_code, name='send_verification'),
-    path('confirm/', Confirm, name='confirm'),
-    path('purchase-history/', getAllOdersByUser, name='purchase-history'),
+
+
+
 ]
