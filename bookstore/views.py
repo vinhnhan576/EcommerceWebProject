@@ -18,6 +18,7 @@ from django.db.models import Avg
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.crypto import get_random_string
+from django.contrib.auth.decorators import login_required
 
 
 class BooksListView(ListView):
@@ -182,14 +183,14 @@ def book_detail(request, pk):
         "book": book,
         "rating_value": rating_value,
         "num_of_reviews": num_of_reviews,
-        "reviews": reviews
+        "reviews": reviews,
     }
 
     return render(request, "detail.html", context)
 
 
 @csrf_exempt
-def AddToCar(request):
+def AddToCart(request):
     if 'cart' not in request.session:
         request.session['cart'] = {}
     if 'cart_subtotal' not in request.session:
@@ -206,7 +207,7 @@ def AddToCar(request):
             request.session['cart'][bookId] = {
                 'name': book.title,
                 'author': book.author.name,
-                'cover': book.cover,
+                'cover': str(book.cover),
                 'price': book.price,
                 'quantity': quantity,
                 'subtotal': quantity*book.price
@@ -227,8 +228,9 @@ def sendReview(request):
 
 def ViewCart(request):
     cart = request.session.get('cart', {})
-    subtotal = request.session.get('cart_subtotal')
-    return render(request, 'cart.html', {'cart': cart, 'cart_subtotal': subtotal})
+    subtotal = request.session.get('cart_subtotal') or 0
+    code = request.session.get('code')
+    return render(request, 'cart.html', {'cart': cart, 'cart_subtotal': subtotal, 'code': code})
 
 
 def RemoveItem(request, item_id):
@@ -246,13 +248,13 @@ def RemoveAll(request):
     request.session['cart_subtotal'] = 0
     return JsonResponse('Remove completed!', safe=False)
 
-def getAllOdersByUser(request,):
+@login_required(login_url='/login') 
+def getAllOdersByUser(request):
     listorder = []
-    userid = request.session.get('userid')
+    userid = request.user.id
     orders = Order.objects.filter(user=userid)
     for order in orders:
         listorder.append({
-            
             'order':order,
             'listdetail':OrderDetail.objects.filter(order=order)
         })
@@ -269,7 +271,7 @@ def CheckOut(request):
         total = 0
         for productID, product in cart.items():
             total += int(product['subtotal'])
-        order = Order.objects.create(email=email, total_price=total)
+        order = Order.objects.create(email=email, total_price=total, user_id=request.user.id)
         for productID, product in cart.items():
             product1 = Book.objects.get(pk=productID)
             print("before", product1.quantity)
@@ -312,6 +314,7 @@ def send_verification_code(request):
         else:
             request.session['code'] = verification_code
     print(request.session['code'])
+    return JsonResponse('Email sent!', safe=False)
 
 
 @csrf_exempt

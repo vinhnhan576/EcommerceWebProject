@@ -23,12 +23,12 @@ a>i {
 }
 
 .navbar {
-    width: calc(100vw - 120px);
+    width: calc(100vw - 110px);
     height: 60px;
     left: 90px;
-    position: fixed;
-    z-index: 1;
-    top: 5px;
+    position: fixed !important;
+    z-index: 999;
+    padding-top: 15px !important;
     background-color: #f1efe3;
 }
 

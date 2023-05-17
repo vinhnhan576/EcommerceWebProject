@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -134,8 +134,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Cấu hình thông tin SMTP server
 EMAIL_HOST = 'smtp.gmail.com'  # Địa chỉ SMTP server
 EMAIL_PORT = 587  # Cổng của SMTP server
-EMAIL_HOST_USER = 'tbinh7469@gmail.com'  # Tài khoản email của bạn
-EMAIL_HOST_PASSWORD = 'avnsspmqtvyytudi'  # Mật khẩu của tài khoản email
+EMAIL_HOST_USER = 'bookwormofficial1@gmail.com'  # Tài khoản email của bạn
+EMAIL_HOST_PASSWORD = 'ippbaflgipgirume'  # Mật khẩu của tài khoản email
 EMAIL_USE_TLS = True  # Sử dụng TLS khi kết nối với SMTP server
 
 # Cấu hình email gửi đi mặc định

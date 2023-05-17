@@ -29,10 +29,10 @@ class Command(BaseCommand):
 def clear_data():
     """Deletes all the table data"""
     User.objects.all().delete()
-    Category.objects.all().delete()
-    Book.objects.all().delete()
-    Author.objects.all().delete()
-    Review.objects.all().delete()
+    # Category.objects.all().delete()
+    # Book.objects.all().delete()
+    # Author.objects.all().delete()
+    # Review.objects.all().delete()
 
 
 def create_category():
@@ -48,12 +48,12 @@ def create_user():
     """Creates an address object combining different elements from the list"""
     first_names = ["Laura", "Linda", "Lisa", "Liz", "Lynn", "Mandy", "Maria", "Martha", "Mary", "Megan", "Peter", "Philip", "Richard", "Robert", "Ryan", "Sam", "Sean", "Sebastian", "Simon", "Stephen", "Steve", "Stewart", "Thomas", "Tim", "Trevor", "Victor", "Warren", "William", "Zachary"]
     last_names = ["Smith", "Johnson", "Johns", "William", "Brown", "Miller", "Davis", "Lopez", "Martin", "Lee", "Nguyen", "Le", "Clark", "Lewis", "Young", "Allen", "Wright", "Scott", "Adams", "Nelson"]
-    password = "123456"
+    password = "123456789"
     phone = "0123456789"
     address = "123 abc street"
     for i in first_names:
         user = User(
-            username=i+"123",
+            username=i+"1234",
             first_name=i,
             last_name=random.choice(last_names),
             phone=phone,

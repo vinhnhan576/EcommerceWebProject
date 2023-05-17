@@ -57,7 +57,7 @@ class Review(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(max_length=1000)
     detail = models.ManyToManyField(Book, through='OrderDetail')
     total_price = models.IntegerField(default=100)

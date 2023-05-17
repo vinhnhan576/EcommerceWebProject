@@ -22,12 +22,6 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'css/_base.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 		<title>Online Bookstore</title>
-		<style type="text/css">
-			html,
-			body {
-				height: 100%;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -76,7 +70,7 @@
 							<div class="flex-shrink-0">
 								<img src="{% static 'images/profile/download.jfif' %}/" alt="" class="profile-pic" />
 							</div>
-							<div class="flex-grow-1 ms-3">{{ user.username }}</div>
+							<div class="flex-grow-1 ms-3">{{ user.first_name }} {{user.last_name}}</div>
 							{% else %}
 							<div class="flex-shrink-0 mr-2">
 								<a href="{% url 'login' %}" class="">Login</a>
