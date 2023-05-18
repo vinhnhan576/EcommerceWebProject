@@ -8,10 +8,7 @@
 <div class="book-detail container">
 	<div class="row book-detail-upper">
 		<div class="col-md-5 book-cover">
-			<!-- <img src="https://dkemhji6i1k0x.cloudfront.net/000_clients/489816/page/489816HeD639gY.png" class="card-img" /> -->
 			<img src="{{book.cover}}" class="card-img" />
-			<!--             
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVqBAIpYFBfWo2y6aymZ0eo_GSNMIP9BL-4w&usqp=CAU" class="card-img" /> -->
 		</div>
 		<div class="col-md-7 grid-margin book-detail-upper-right">
 			<div class="card-body" style="font-weight: 400; line-height: 30px">
@@ -124,8 +121,8 @@
 				<div class="price-books-containers">
 					<div class="price-books">
 						{% if object.book_available is false %}
-						<div class="price-books-text-before">50.000 vnd</div>
-						<div class="price-books-text-after">{{book.price}} vnd</div>
+						<div class="price-books-text-before">{{book.price|add:20000}} vnđ</div>
+						<div class="price-books-text-after">{{book.price}} vnđ</div>
 						{% else %}
 						<h4 class="text-danger">Out of Stock !</h4>
 						{% endif %}
@@ -136,7 +133,7 @@
 							<span id="quantity" class="quantity__input">1</span>
 							<span class="quantity__plus" onclick="increment()">+</span>
 						</div>
-						<button class="btn btn-primary" onclick="addItem()">Buy now</button>
+						<button class="btn btn-primary" onclick="addItem(); alert(' {{book.title}} has been added to your cart!')">Buy now</button>
 					</div>
 				</div>
 			</div>
@@ -225,6 +222,7 @@
 					<div class="review-card-info" style="width: 100%">
 						<div class="row rating-time">
 							<div class="col-md-6">
+								<div style="font-weight: 600">{{review.user.first_name}} {{review.user.last_name}}</div>
 								<div class="rating">
 									{% if review.rating == 1 %}
 									<i class="fa-solid fa-star"></i>
