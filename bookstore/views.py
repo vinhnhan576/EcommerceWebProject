@@ -200,6 +200,7 @@ def AddToCart(request):
         bookId = body['id']
         quantity = int(body['quantity'])
         book = Book.objects.get(id=bookId)
+        print(book.cover)
         if bookId in request.session['cart']:
             request.session['cart'][bookId]['quantity'] += quantity
             request.session['cart'][bookId]['subtotal'] += request.session['cart'][bookId]['quantity']*book.price
@@ -231,6 +232,7 @@ def ViewCart(request):
     subtotal = request.session.get('cart_subtotal') or 0
     code = request.session.get('code')
     return render(request, 'cart.html', {'cart': cart, 'cart_subtotal': subtotal, 'code': code})
+    
 
 
 def RemoveItem(request, item_id):
