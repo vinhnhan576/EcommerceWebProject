@@ -28,7 +28,7 @@
 						<div class="row">
 							<div class="col-8 grid-margin">
 								<div class="form-label-group in-border">
-									<input type="text" id="tt2" class="form-control" placeholder="Floating Label"
+									<input type="text" id="name" class="form-control" placeholder="Floating Label"
 										required />
 									<label for="tt2">Name*</label>
 								</div>
@@ -46,7 +46,7 @@
 						</div>
 
 						<div class="form-label-group in-border">
-							<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
+							<input type="text" id="phone" class="form-control" placeholder="Floating Label" required />
 							<label for="tt2">Phone number*</label>
 						</div>
 						<div class="row">
@@ -86,17 +86,14 @@
 					<div class="card-body">
 						<h4 class="card-title">Shipping address</h4>
 						<div class="form-label-group in-border">
-							<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
+							<input type="text" id="address" class="form-control" placeholder="Floating Label"
+								required />
 							<label for="tt2">Street name & house number*</label>
-						</div>
-						<div class="form-label-group in-border">
-							<input type="text" id="tt2" class="form-control" placeholder="Floating Label" required />
-							<label for="tt2">District*</label>
 						</div>
 						<div class="row">
 							<div class="col-7 grid-margin">
 								<div class="form-label-group in-border">
-									<input type="text" id="tt2" class="form-control" placeholder="Floating Label"
+									<input type="text" id="city" class="form-control" placeholder="Floating Label"
 										required />
 									<label for="tt2">City*</label>
 								</div>
@@ -151,13 +148,19 @@
 			<div class="col-4 col-4-5 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Your Order</h4>
+						<div class="d-flex align-items-center justify-content-between mb-4">
+							<h4 class="card-title m-0">Your Order</h4>
+							<button type="button" name="" id="" class="btn btn-primary" onclick="removeAll()">Remove
+								All</button>
+						</div>
 						{% for product_id, product in cart.items %}
 						<div class="card-row d-flex justify-content-between mb-5">
 							<div class="card-row-left d-flex w-100">
 								<img class="card-row-img mr-2" src="/{{product.cover}}" alt="" />
 								<div class="d-flex flex-column justify-content-between" style="width: 79%">
-									<p class="card-row-title">{{ product.name }}</p>
+									<i class="fa fa-minus position-absolute" style="right: 30px;cursor: pointer;"
+										onclick="removeItem({{product_id}})" aria-hidden="true"></i>
+									<p class="card-row-title" style="max-width: 75%">{{ product.name }}</p>
 
 									<div class="d-flex justify-content-between">
 										<div>
@@ -203,7 +206,18 @@
 </html>
 
 <script>
-	console.log("{{request.session.cart.items}}");
+	window.addEventListener(
+		"load",
+		async function () {
+				if ('{{user.is_authenticated}}' == "True") {
+					document.getElementById('name').value = '{{user.first_name}} {{user.last_name}}';
+					document.getElementById('phone').value = '{{user.phone}}';
+					document.getElementById('email').value = '{{user.email}}';
+					document.getElementById('address').value = '{{user.address}}';
+				}
+			},
+			false
+	);
 
 	async function send_verification_code() {
 		console.log('Sending')
@@ -237,6 +251,28 @@
 		});
 
 		console.log("email sent ", user_input);
+	}
+
+	async function removeAll() {
+		var url = "{% url 'remove_all' %}";
+		await fetch(url, {
+			method: "DELETE",
+			headers: {
+				"content-type": "application/json",
+			},
+		});
+		window.location.reload();
+	}
+
+	async function removeItem(id) {
+		var url = "{% url 'remove_item' item_id=1234 %}".replace(/1234/, id.toString());
+		await fetch(url, {
+			method: "DELETE",
+			headers: {
+				"content-type": "application/json",
+			},
+		});
+		window.location.reload();
 	}
 
 	var forms = document.querySelectorAll('.needs-validation')

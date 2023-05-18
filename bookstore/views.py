@@ -33,38 +33,13 @@ class BooksDetailView(DetailView):
 
 class SearchResultsListView(ListView):
     model = Book
-    template_name = 'search_results.html'
+    template_name = 'detail.html'
 
-    def get_queryset(self):  # new
+    def get_queryset(self): 
         query = self.request.GET.get('q')
         return Book.objects.filter(
             Q(title__icontains=query) | Q(author__icontains=query)
         )
-
-
-class BookCheckoutView(ListView):
-    model = Book
-    template_name = 'checkout.html'
-    # login_url     = 'login'
-    # login_url = 'login'
-
-    # def checkout(request):
-    #     if request.method == 'POST':
-    #         body = json.loads(request.body)
-    #         product_id = body.get('productId')
-    #         if not product_id:
-    #             return JsonResponse({'error': 'productId is required'}, status=400)
-    #         try:
-    #             product = Book.objects.get(id=product_id)
-    #         except Book.DoesNotExist:
-    #             return JsonResponse({'error': 'Invalid productId'}, status=400)
-    #         order = Order.objects.create(
-    #             user=request.user,
-    #             product=product
-    #         )
-    #         return JsonResponse({'orderId': order.id})
-    #     else:
-    #         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 from django.db.models import Sum
@@ -80,7 +55,6 @@ def home(request):
     categories = Category.objects.annotate(sold_quantity=Sum("book__sold_quantity")).order_by("-sold_quantity")[:category_num]
     top_categories = []
     for category in categories:
-        print(category.__getattribute__('sold_quantity'))
         top_categories.append({'category_info' : category, 'books' : Book.objects.filter(category=category).order_by("-sold_quantity")[:book_num]}) 
 
     return render(request, 'home.html', {"top_books": top_books, "top_categories": top_categories})
@@ -92,7 +66,6 @@ def checkoutResult(request, email):
 
 def paymentComplete(request):
     body = json.loads(request.body)
-    print('BODY:', body)
     product = Book.objects.get(id=body['productId'])
     Order.objects.create(
         product=product
@@ -200,7 +173,6 @@ def AddToCart(request):
         bookId = body['id']
         quantity = int(body['quantity'])
         book = Book.objects.get(id=bookId)
-        print(book.cover)
         if bookId in request.session['cart']:
             request.session['cart'][bookId]['quantity'] += quantity
             request.session['cart'][bookId]['subtotal'] += request.session['cart'][bookId]['quantity']*book.price
@@ -234,15 +206,16 @@ def ViewCart(request):
     return render(request, 'cart.html', {'cart': cart, 'cart_subtotal': subtotal, 'code': code})
     
 
-
+@csrf_exempt
 def RemoveItem(request, item_id):
     cart = request.session.get('cart', {})
     if item_id in cart:
+        request.session['cart_subtotal'] -= cart[item_id]["subtotal"]
         del cart[item_id]
     request.session['cart'] = cart
     return JsonResponse('Remove completed!', safe=False)
 
-
+@csrf_exempt
 def RemoveAll(request):
     cart = request.session.get('cart', {})
     cart.clear()
@@ -276,7 +249,6 @@ def CheckOut(request):
         order = Order.objects.create(email=email, total_price=total, user_id=request.user.id)
         for productID, product in cart.items():
             product1 = Book.objects.get(pk=productID)
-            print("before", product1.quantity)
             quantity = int(product.get('quantity'))
             order_detail = order.detail.through.objects.create(
                 order=order, book=product1, quantity=quantity, total_price=product['subtotal'])
@@ -285,16 +257,12 @@ def CheckOut(request):
             product2.sold_quantity += quantity
             product2.quantity -= quantity
             product2.save()
-            print("after", product2.quantity)
         RemoveAll(request)
-        print('success')
     return JsonResponse('Checkout completed!', safe=False)
 
 
 def error404View(request, exception):
-    return render(request, '404.html')
-
- 
+    return render(request, '404.html') 
 
 @csrf_exempt
 def send_verification_code(request):
@@ -315,22 +283,17 @@ def send_verification_code(request):
             request.session['code'] = verification_code
         else:
             request.session['code'] = verification_code
-    print(request.session['code'])
     return JsonResponse('Email sent!', safe=False)
 
 
 @csrf_exempt
 def Confirm(request):
-    print(request.session.get('code'))
     if request.method == 'POST':
         user_input_code = request.POST.get('user_input')  
         code_verification = request.session.get('code')
-        print(user_input_code, code_verification)
         if code_verification == user_input_code:
             message = 'Code verification'
-            print(message)
             return render(request, 'cart.html', {'message':message})
         else:
             message = 'Code not verification'
-            print(message)
             return render(request, 'cart.html', {'message': message})

@@ -5,17 +5,14 @@
     --secondary-color: #ffffff;
 }
 
-*{
-    font-family: 'Poppins', sans-serif;
-}
-
 p, label{
     margin-bottom: 0 !important;
     line-height: 1;
 }
 
 body {
-    background: #f1efe3 !important;
+    background: #f1efe3 !important; 
+    font-family: 'Poppins', sans-serif;
 }
 
 .web:has(.cart) {
