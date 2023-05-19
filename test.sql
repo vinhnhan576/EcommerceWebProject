@@ -1,2 +1,1 @@
-CREATE TABLE bookstore_user (id PRIMARY KEY, username VARCHAR(255), password VARCHAR(255), address VARCHAR(255), phone VARCHAR(255))
-INSERT INTO bookstore_user (id, username, password, address, phone) VALUES (1, 'vnhan', '123456', 'test', '1234567890')
+DROP TABLE bookstore_user

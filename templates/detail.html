@@ -171,7 +171,8 @@
 			</div>
 		</div>
 
-		<div class="row selection-reviews-container" style="padding-top: 20px; margin-bottom: 50px; width: 100%">
+		<div class="row selection-reviews-container" style="padding-top: 20px; width: 100%">
+			{% if user.is_authenticated %}
 			<div class="row" style="margin-bottom: 30px;">
 				<div class="col-md-2 review-card-container"></div>
 				<div class="col-md-10 review-card-container">
@@ -211,6 +212,7 @@
 						<i class="fa-solid fa-paper-plane send-review" onclick="sendReview()"></i>
 					</div>
 				</div>
+				{% endif %}
 			</div>
 			{% for review in reviews reversed %}
 			<div class="row review">
@@ -303,7 +305,7 @@
 				rating: document.querySelector('input[name="rating"]:checked').value,
 				created_at: Date.now(),
 				book_id: "{{book.id}}",
-				user_id: 1,
+				user_id: "{{user.id}}",
 			}),
 		});
 		console.log("review sent");

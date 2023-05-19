@@ -278,11 +278,12 @@ def send_verification_code(request):
         from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = [email]
         send_mail(subject, message, from_email, recipient_list)
-        if 'cart' not in request.session:
+        if 'code' not in request.session:
             request.session['code'] = {}
             request.session['code'] = verification_code
         else:
             request.session['code'] = verification_code
+
     return JsonResponse('Email sent!', safe=False)
 
 
