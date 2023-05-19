@@ -1,5 +1,6 @@
 from django.db import models
 from EcommerceWebProject.settings import AUTH_USER_MODEL
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
@@ -50,7 +51,7 @@ class Review(models.Model):
     review = models.TextField()
     rating = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.review
